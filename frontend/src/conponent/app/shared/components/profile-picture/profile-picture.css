@@ -1,0 +1,18 @@
+.profile-picture {
+  width: 128px;
+  height: 128px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-picture img {
+  border-radius: 50%;
+  display: block;
+  max-width: 95%;
+  width: 95%;
+  max-height: 95%;
+  object-fit: cover;
+}

@@ -1,0 +1,9 @@
+<div class="channel">
+  <h3>{{name}}</h3>
+  <div class="gap flex-column-start">
+    <ng-content/>
+  </div>
+  <div class="button-container flex-row-center">
+    <app-button (click)="onClickJoin()">rejoindre</app-button>
+  </div>
+</div>
