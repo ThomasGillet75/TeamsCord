@@ -2,23 +2,33 @@ using Application.Interfaces;
 using Application.UseCase;
 using Infrastructure;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IEntityFrameworkService, EntityFrameworkService>();
 builder.Services.AddScoped<GetProfileUseCase>();
-var app = builder.Build();
-app.UseHttpsRedirection();
-app.UseForwardedHeaders();
 
-// Configure the HTTP request pipeline.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
+WebApplication app = builder.Build();
+
+app.UseForwardedHeaders();
+app.UseCors("AllowAll");
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.UseSwaggerUI(options => { options.SwaggerEndpoint("/openapi/v1.json", "InstaBook"); });
+    app.UseSwaggerUI(options => { options.SwaggerEndpoint("/openapi/v1.json", "TeamsCord"); });
 }
 
-app.UseCors("AllowAll");
 app.MapControllers();
 app.Run();
