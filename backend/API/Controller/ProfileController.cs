@@ -6,12 +6,12 @@ namespace API.Controller;
 
 [ApiController]
 [Route("api/profile")]
-public class ProfileController(GetProfileUseCase getProfileUseCase) : ControllerBase
+public class ProfileController(ProfileUseCases profileUseCases) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult> GetProfile()
     {
-        ProfileResponse profileResponse = new ProfileResponse("Gillet","Thomas","thomate@gmail.com");
+        ProfileResponse profileResponse = profileUseCases.Get.Execute();
         
         return Ok(profileResponse);
     }
@@ -19,6 +19,8 @@ public class ProfileController(GetProfileUseCase getProfileUseCase) : Controller
     [HttpPost]
     public async Task<ActionResult> CreateProfile()
     {
+        CreateProfileRequest createProfileRequest = new CreateProfileRequest("test","test","test@test.com");
+        bool profileResponse = profileUseCases.Create.Execute(createProfileRequest);
         return Ok();
     }
 

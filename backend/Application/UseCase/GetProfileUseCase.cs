@@ -12,7 +12,7 @@ public class GetProfileUseCase
         _entityFrameworkService = service;
     }
 
-    public ProfileResponse GetProfile()
+    public ProfileResponse Execute()
     {
         ProfileResponse profileResponse = new ProfileResponse("Thomas", "gillet", "thgi@gmail.com");
         return profileResponse; 

@@ -1,19 +1,29 @@
 ﻿using Application.Interfaces;
+using Domain;
 using Infrastructure.Models;
 
 namespace Infrastructure;
 
 public class EntityFrameworkService : IEntityFrameworkService
 {
-    InstaBookContext db = new InstaBookContext();
+    private readonly DatabaseContext _db;
 
+    public EntityFrameworkService(DatabaseContext db)
+    {
+        _db = db;
+    }
     public User GetUserById(int? userId)
     {
-        return db.Users.Find(userId);
+        return _db.Users.Find(userId);
     }
 
-    public void AddUser(User user)
+    public void AddUser(UserEntity user)
     {
-        db.Users.Add(user);
+        Console.WriteLine("=======================" +
+                          "Add User" +
+                          "=======================");
+        User newUser = new User(10, user.Username, user.Email,"dsfq");
+        _db.Users.Add(newUser);
+        _db.SaveChanges();
     }
 }

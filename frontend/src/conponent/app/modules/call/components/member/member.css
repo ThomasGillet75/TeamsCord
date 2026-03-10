@@ -8,3 +8,8 @@
 .member{
   gap:8px;
 }
+
+.text{
+  font-family: Elvenir, Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}

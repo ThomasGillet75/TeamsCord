@@ -4,11 +4,14 @@
   border-radius: 8px;
   padding: 8px 16px;
   cursor: pointer;
-  background: rgba(0,0,0,0.2);
-  color: aliceblue;
+  background: rgb(39, 41, 47);
+  color: #a6a8ae;
+  font-size: 18px;
+  font-family: var(--font-engine);
 }
 
 .primary:hover {
-  background: rgba(0,0,0,0.5);
+  background: rgb(164, 168, 176);
+  color: #27292FFF
 }
 

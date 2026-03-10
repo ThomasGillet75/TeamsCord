@@ -1,13 +1,18 @@
 using Application.Interfaces;
 using Application.UseCase;
 using Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IEntityFrameworkService, EntityFrameworkService>();
+builder.Services.AddScoped<ProfileUseCases>();
+builder.Services.AddScoped<CreateProfileUseCase>();
 builder.Services.AddScoped<GetProfileUseCase>();
+
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options =>
 {
@@ -32,3 +37,4 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 app.Run();
+

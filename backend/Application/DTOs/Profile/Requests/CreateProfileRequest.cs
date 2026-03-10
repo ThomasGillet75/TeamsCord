@@ -1,6 +1,3 @@
 ﻿namespace Application.DTOs.Profile;
 
-public class CreateProfileRequest
-{
-    
-}
+public record CreateProfileRequest(string LastName, string FirstName, string Email);
