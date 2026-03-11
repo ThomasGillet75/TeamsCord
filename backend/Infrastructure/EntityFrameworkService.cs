@@ -19,11 +19,7 @@ public class EntityFrameworkService : IEntityFrameworkService
 
     public void AddUser(UserEntity user)
     {
-        Console.WriteLine("=======================" +
-                          "Add User" +
-                          "=======================");
-        User newUser = new User(10, user.Username, user.Email,"dsfq");
-        _db.Users.Add(newUser);
+        _db.Users.Add(new User(user.Username, user.Email,user.Password));
         _db.SaveChanges();
     }
 }

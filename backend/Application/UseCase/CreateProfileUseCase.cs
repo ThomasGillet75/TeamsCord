@@ -15,8 +15,7 @@ public class CreateProfileUseCase
 
     public bool Execute(CreateProfileRequest createProfileUseRequest)
     {
-        UserEntity userEntity = new UserEntity("salut", "salut@salut");
-        _entityFrameworkService.AddUser(userEntity);
+        _entityFrameworkService.AddUser(new UserEntity(createProfileUseRequest.Username, createProfileUseRequest.Email,createProfileUseRequest.Password));
         return true; 
     }
 }

@@ -17,11 +17,10 @@ public class ProfileController(ProfileUseCases profileUseCases) : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> CreateProfile()
+    public async Task<ActionResult> CreateProfile(CreateProfileRequest createProfileRequest)
     {
-        CreateProfileRequest createProfileRequest = new CreateProfileRequest("test","test","test@test.com");
         bool profileResponse = profileUseCases.Create.Execute(createProfileRequest);
-        return Ok();
+        return Ok(profileResponse);
     }
 
     [HttpPut]
