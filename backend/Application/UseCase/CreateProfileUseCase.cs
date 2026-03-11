@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Profile;
+using Application.DTOs.Profile.Requests;
 using Application.Interfaces;
 using Domain;
 

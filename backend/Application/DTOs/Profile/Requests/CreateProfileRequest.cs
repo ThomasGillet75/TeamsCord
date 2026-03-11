@@ -1,3 +1,21 @@
-﻿namespace Application.DTOs.Profile;
+﻿using System.ComponentModel.DataAnnotations;
 
-public record CreateProfileRequest(string Username, string Email, string Password);
+namespace Application.DTOs.Profile.Requests;
+
+public record CreateProfileRequest
+{
+    [Required]
+    [MaxLength(50)]
+    public string Username { get; init; } = string.Empty;
+    
+    [Required]
+    [EmailAddress] 
+    [MaxLength(50)]
+    public string Email { get; init; } = string.Empty;
+    
+    [Required]
+    [MinLength(8)]
+    [MaxLength(50)]
+    public string Password { get; init; } = string.Empty;
+
+};
