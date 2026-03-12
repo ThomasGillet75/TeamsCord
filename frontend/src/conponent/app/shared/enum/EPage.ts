@@ -1,4 +1,6 @@
 export enum EPage {
   Home="/",
-  Profile="/profile",
+  Profile="profile",
+  Signup="signup",
+  Signin= "signin",
 }

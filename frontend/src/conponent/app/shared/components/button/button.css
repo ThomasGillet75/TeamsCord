@@ -7,10 +7,29 @@
   background: rgb(39, 41, 47);
   color: #a6a8ae;
   font-size: 18px;
+  width: 100%;
   font-family: var(--font-engine);
 }
 
 .primary:hover {
+  background: rgb(164, 168, 176);
+  color: #27292FFF
+}
+
+.secondary{
+  border: none;
+  background: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  background: var(--second-color);
+  color: var(--text-color-dark);
+  font-size: 18px;
+  width: 100%;
+  font-family: var(--font-engine);
+}
+
+.secondary:hover {
   background: rgb(164, 168, 176);
   color: #27292FFF
 }

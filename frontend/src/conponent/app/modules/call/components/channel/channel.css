@@ -1,7 +1,7 @@
 .channel{
   width: 250px;
   height: 250px;
-  background: #6d85e7;
+  background: var(--second-color);
   border-radius: 12px;
   padding: 12px;
   position: relative;
