@@ -1,4 +1,4 @@
-import {Component, input, InputSignal} from '@angular/core';
+import {Component, input, InputSignal, model, ModelSignal} from '@angular/core';
 
 @Component({
   selector: 'tc-input',
@@ -8,5 +8,11 @@ import {Component, input, InputSignal} from '@angular/core';
 })
 export class Input {
   type:InputSignal<string> = input<string>("text");
-  placeholder:InputSignal<string> = input<string>("Enter text");
+  title:InputSignal<string> = input<string>("Enter text");
+  value:ModelSignal<string> = model<string>("");
+
+  onInput(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.value.set(target.value ?? "");
+  }
 }

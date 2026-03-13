@@ -1,1 +1,4 @@
-<input class="input" [type]="type()" [placeholder]="placeholder()"/>
+<div class="gap">
+  <p class="text">{{ title() }}</p>
+  <input class="input" [type]="type()" [value]="value()" (input)="onInput($event)"/>
+</div>

@@ -1,6 +1,6 @@
 ﻿namespace Application.UseCase;
 
-public record ProfileUseCases(
+public record AuthUseCase(
     GetProfileUseCase Get,
-    CreateProfileUseCase Create
+    CreateProfileUseCase SignUp
 );

@@ -2,7 +2,7 @@
 
 namespace Application.DTOs.Profile.Requests;
 
-public record CreateProfileRequest
+public record SignUpRequest
 {
     [Required]
     [MaxLength(50)]

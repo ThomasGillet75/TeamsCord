@@ -30,7 +30,7 @@
 }
 
 .secondary:hover {
-  background: rgb(164, 168, 176);
+  background: var(--text-color-grey);
   color: #27292FFF
 }
 

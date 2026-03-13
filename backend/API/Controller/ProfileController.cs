@@ -6,21 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controller;
 
 [ApiController]
-[Route("api/profile")]
-public class ProfileController(ProfileUseCases profileUseCases) : ControllerBase
+[Route("api/auth")]
+public class ProfileController(AuthUseCase authUseCase) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult> GetProfile()
     {
-        ProfileResponse profileResponse = profileUseCases.Get.Execute();
+        ProfileResponse profileResponse = authUseCase.Get.Execute();
         
         return Ok(profileResponse);
     }
 
     [HttpPost]
-    public async Task<ActionResult> CreateProfile(CreateProfileRequest createProfileRequest)
+    public async Task<ActionResult> SignUp(SignUpRequest signUpRequest)
     {
-        bool profileResponse = profileUseCases.Create.Execute(createProfileRequest);
+        bool profileResponse = authUseCase.SignUp.Execute(signUpRequest);
         return Ok(profileResponse);
     }
 

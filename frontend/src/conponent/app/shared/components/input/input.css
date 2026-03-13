@@ -5,6 +5,12 @@
   height: 48px;
   width: 254px;
   background-color: var(--main-color);
-  color: var(--text-color-dark);
+  color: var(--text-color-grey);
   padding: 0 8px ;
+}
+
+.text{
+  color: var(--text-color-grey);
+  font-family: var(--font-engine);
+  font-size: 18px;
 }

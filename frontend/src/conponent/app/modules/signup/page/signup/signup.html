@@ -1,10 +1,10 @@
 <div class="flex-column-center-center full-height">
   <tc-banner>Sign UP</tc-banner>
   <div class="flex-column gap">
-    <tc-input placeholder="Username"/>
-    <tc-input placeholder="Email"/>
-    <tc-input type="password" placeholder="Password"/>
-    <tc-input type="password" placeholder="Password"/>
+    <tc-input title="Username" [(value)]="username"/>
+    <tc-input type="email" title="Email" [(value)]="email"/>
+    <tc-input type="password" title="Password" [(value)]="password"/>
+    <tc-input type="password" title="Verify Password" [(value)]="verifyPassword"/>
     <tc-button (onClick)="onSignUp()">Sign Up</tc-button>
   </div>
 </div>

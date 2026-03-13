@@ -3,6 +3,7 @@
 
   --second-color: #6d85e7;
   --main-color: #303446;
-  --text-color: #27292FFF;
-  --text-color-dark: #fdfdff;
+  --text-color-dark: #27292FFF;
+  --text-color-white: #fdfdff;
+  --text-color-grey: rgb(164, 168, 176);
 }

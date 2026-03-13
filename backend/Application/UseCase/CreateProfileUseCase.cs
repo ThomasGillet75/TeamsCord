@@ -13,9 +13,9 @@ public class CreateProfileUseCase
         _entityFrameworkService = service;
     }
 
-    public bool Execute(CreateProfileRequest createProfileUseRequest)
+    public bool Execute(SignUpRequest signUpUseRequest)
     {
-        _entityFrameworkService.AddUser(new UserEntity(createProfileUseRequest.Username, createProfileUseRequest.Email,createProfileUseRequest.Password));
+        _entityFrameworkService.AddUser(new UserEntity(signUpUseRequest.Username, signUpUseRequest.Email,signUpUseRequest.Password));
         return true; 
     }
 }

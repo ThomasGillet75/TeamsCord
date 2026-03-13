@@ -8,7 +8,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IEntityFrameworkService, EntityFrameworkService>();
-builder.Services.AddScoped<ProfileUseCases>();
+builder.Services.AddScoped<AuthUseCase>();
 builder.Services.AddScoped<CreateProfileUseCase>();
 builder.Services.AddScoped<GetProfileUseCase>();
 
