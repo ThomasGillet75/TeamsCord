@@ -1,0 +1,10 @@
+input{
+  border: none;
+  box-shadow: 0 0 8px 3px rgba(0,0,0,0.2) inset;
+  border-radius: 8px;
+  height: 48px;
+  width: 254px;
+  background-color: var(--main-color);
+  color: var(--text-color-dark);
+  padding: 0 8px ;
+}

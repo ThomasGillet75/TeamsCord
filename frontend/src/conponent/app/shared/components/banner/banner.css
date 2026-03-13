@@ -1,0 +1,22 @@
+.banner{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 20%;
+  background-color: var(--second-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 10px 10px 0;
+}
+.banner-content{
+  rotate: -90deg;
+  font-size: 300px;
+  text-align: center;
+  color: var(--main-color);
+  font-family: var(--font-engine);
+  white-space: nowrap;
+}
+
