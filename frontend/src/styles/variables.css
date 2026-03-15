@@ -1,7 +1,7 @@
 :root {
   --font-engine: 'Engine', sans-serif;
-
-  --second-color: #6d85e7;
+  --secondary-color: #6d85e7;
+  --tertiary-color: #292c3c;
   --main-color: #303446;
   --text-color-dark: #27292FFF;
   --text-color-white: #fdfdff;

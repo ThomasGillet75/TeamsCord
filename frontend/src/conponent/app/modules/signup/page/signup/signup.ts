@@ -37,7 +37,6 @@ export class Signup {
         this.router.navigate([EPage.Signin]);
       },
       error: (err: unknown) => {
-        // Why: network/API errors are normal runtime events and should be handled.
         console.error('Signup failed', err);
       },
     })
