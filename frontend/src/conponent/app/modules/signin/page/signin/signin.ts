@@ -35,7 +35,9 @@ export class Signin {
     }
     this.authService.signIn(payload).subscribe({
       next: result => {
-        this.router.navigate([EPage.Home]);
+        if(result.accesToken != "") {
+          this.router.navigate([EPage.Home]);
+        }
       },
       error: error => {
         console.log(error);

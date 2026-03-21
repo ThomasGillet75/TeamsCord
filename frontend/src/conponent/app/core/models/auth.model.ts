@@ -16,7 +16,7 @@ export interface SignInRequest {
 }
 
 export interface SignInResponse {
-  token: string;
-  refresh_token: string;
+  accesToken: string;
+  refreshToken: string;
 }
 
