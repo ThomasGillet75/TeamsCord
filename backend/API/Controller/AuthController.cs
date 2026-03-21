@@ -20,15 +20,15 @@ public class AuthController(AuthUseCase authUseCase) : ControllerBase
     [HttpPost("signin")]
     public async Task<ActionResult> SignIn(SignInRequest signInRequest)
     {
-        SignInResponse profileResponse = authUseCase.SignIn.Execute(signInRequest);
-        return Ok(profileResponse);
+        SignInResponse signInResponse = authUseCase.SignIn.Execute(signInRequest);
+        return Ok(signInResponse);
     }
 
     [HttpPost("signup")]
     public async Task<ActionResult> SignUp(SignUpRequest signUpRequest)
     {
-        bool profileResponse = authUseCase.SignUp.Execute(signUpRequest);
-        return Ok(profileResponse);
+        bool signUpResponse = authUseCase.SignUp.Execute(signUpRequest);
+        return Ok(signUpResponse);
     }
 
     [HttpPut]

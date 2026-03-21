@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain;
+using Infrastructure.Mapper;
 using Infrastructure.Models;
 
 namespace Infrastructure;
@@ -24,13 +25,13 @@ public class EntityFrameworkService : IEntityFrameworkService
         _db.SaveChanges();
     }
 
-    public bool VerifyUser(string email, string password)
+    public UserEntity VerifyUser(string email, string password)
     {
         User user = _db.Users.SingleOrDefault(u => u.Email == email && u.Password == password);
-        if (user == null)
+        if (user != null)
         {
-            return false;
+            return UserMapper.ToDomain(user);
         }
-        return true;
+        return null;
     }
 }

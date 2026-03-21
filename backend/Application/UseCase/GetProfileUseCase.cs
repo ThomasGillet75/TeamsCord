@@ -16,6 +16,6 @@ public class GetProfileUseCase
 
     public void Execute()
     {
-        Console.WriteLine(_tokenService.GenerateToken("aezrazrzr"));
+        
     }
 }

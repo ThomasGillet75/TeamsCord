@@ -2,6 +2,6 @@
 
 public interface ITokenService
 {
-    public string GenerateToken(string userId); 
+    public string GenerateToken(Guid userId, string email); 
     public Task<bool> ValidateToken(string token);
 }

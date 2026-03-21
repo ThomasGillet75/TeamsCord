@@ -39,15 +39,14 @@ public class TokenService : ITokenService
         };
     }
     
-    public string GenerateToken(string userId)
+    public string GenerateToken(Guid userId, string email)
     {
-        Console.WriteLine(_issuer);
         SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new []
             {
-                new Claim(JwtRegisteredClaimNames.Sub, userId),
-                new Claim(JwtRegisteredClaimNames.Email, "user@example.com")
+                new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, email)
             }),
 
             Expires = DateTime.UtcNow.AddHours(24),

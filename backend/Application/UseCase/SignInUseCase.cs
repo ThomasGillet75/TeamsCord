@@ -1,23 +1,23 @@
 ﻿using Application.DTOs.Auth.Requests;
 using Application.DTOs.Profile;
 using Application.Interfaces;
+using Domain;
 
 namespace Application.UseCase;
 
 public class SignInUseCase
 {
     IEntityFrameworkService _entityFrameworkService;
-    
-    public SignInUseCase(IEntityFrameworkService service)
+    ITokenService _tokenService;
+    public SignInUseCase(IEntityFrameworkService service, ITokenService tokenService)
     {
         _entityFrameworkService = service;
+        _tokenService = tokenService;
     }
     public SignInResponse Execute(SignInRequest signInRequest)
     {
-        if (_entityFrameworkService.VerifyUser(signInRequest.Email, signInRequest.Password))
-        {
-            return new SignInResponse("accessToken", "refreshToken");
-        }
-        throw new Exception("Invalid email or password");
+        UserEntity user = _entityFrameworkService.VerifyUser(signInRequest.Email, signInRequest.Password);
+        string token =  _tokenService.GenerateToken(user.Id,user.Email );
+        return new SignInResponse(token, "refreshToken");
     }
 }
