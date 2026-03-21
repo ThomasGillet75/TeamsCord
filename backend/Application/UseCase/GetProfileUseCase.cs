@@ -6,15 +6,16 @@ namespace Application.UseCase;
 public class GetProfileUseCase
 {
     IEntityFrameworkService _entityFrameworkService;
-    
-    public GetProfileUseCase(IEntityFrameworkService service)
+    ITokenService _tokenService;
+
+    public GetProfileUseCase(IEntityFrameworkService service, ITokenService tokenService)
     {
         _entityFrameworkService = service;
+        _tokenService = tokenService;
     }
 
-    public ProfileResponse Execute()
+    public void Execute()
     {
-        ProfileResponse profileResponse = new ProfileResponse("Thomas", "gillet", "thgi@gmail.com");
-        return profileResponse; 
+        Console.WriteLine(_tokenService.GenerateToken("aezrazrzr"));
     }
 }

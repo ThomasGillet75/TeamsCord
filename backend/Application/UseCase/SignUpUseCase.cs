@@ -1,14 +1,14 @@
-﻿using Application.DTOs.Profile.Requests;
+﻿using Application.DTOs.Auth.Requests;
 using Application.Interfaces;
 using Domain;
 
 namespace Application.UseCase;
 
-public class CreateProfileUseCase
+public class SignUpUseCase
 {
     IEntityFrameworkService _entityFrameworkService;
 
-    public CreateProfileUseCase(IEntityFrameworkService service)
+    public SignUpUseCase(IEntityFrameworkService service)
     {
         _entityFrameworkService = service;
     }

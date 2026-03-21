@@ -12,6 +12,7 @@ public class EntityFrameworkService : IEntityFrameworkService
     {
         _db = db;
     }
+
     public User GetUserById(int? userId)
     {
         return _db.Users.Find(userId);
@@ -19,7 +20,17 @@ public class EntityFrameworkService : IEntityFrameworkService
 
     public void AddUser(UserEntity user)
     {
-        _db.Users.Add(new User(user.Username, user.Email,user.Password));
+        _db.Users.Add(new User(user.Username, user.Email, user.Password));
         _db.SaveChanges();
+    }
+
+    public bool VerifyUser(string email, string password)
+    {
+        User user = _db.Users.SingleOrDefault(u => u.Email == email && u.Password == password);
+        if (user == null)
+        {
+            return false;
+        }
+        return true;
     }
 }

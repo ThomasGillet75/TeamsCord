@@ -6,5 +6,6 @@ namespace Application.Interfaces;
 
 public interface IEntityFrameworkService
 {
-    void AddUser(UserEntity createProfileRequest);
+    void AddUser(UserEntity user);
+    bool VerifyUser(string email, string password);
 }

@@ -2,5 +2,6 @@
 
 public record AuthUseCase(
     GetProfileUseCase Get,
-    CreateProfileUseCase SignUp
+    SignInUseCase SignIn,
+    SignUpUseCase SignUp
 );
