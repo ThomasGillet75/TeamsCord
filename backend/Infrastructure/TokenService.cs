@@ -58,7 +58,7 @@ public class TokenService : ITokenService
         return _handler.CreateToken(descriptor);
     }
     
-    public async Task<bool> ValidateToken(string token)
+    public async Task<bool> IsTokenValid(string token)
     {
         TokenValidationResult result =  await _handler.ValidateTokenAsync(token, _validationParameters);
         if(result.IsValid)

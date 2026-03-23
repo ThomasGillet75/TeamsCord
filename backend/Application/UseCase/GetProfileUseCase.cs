@@ -1,5 +1,7 @@
-﻿using Application.DTOs.Profile;
+﻿using Application.DTOs.Auth.Requests;
+using Application.DTOs.Profile;
 using Application.Interfaces;
+using Domain;
 
 namespace Application.UseCase;
 
@@ -14,8 +16,14 @@ public class GetProfileUseCase
         _tokenService = tokenService;
     }
 
-    public void Execute()
+    public async Task<GetUserResponse> Execute(GetUserRequest getUserRequest)
     {
-        
+        bool isTokenValid = await _tokenService.IsTokenValid(getUserRequest.accessToken);
+        if(isTokenValid)
+        {
+            throw new Exception("Invalid token");
+        }
+        UserEntity userEntity = _entityFrameworkService.GetUserById(Guid.Parse(getUserRequest.Id));
+        return new GetUserResponse(userEntity);
     }
 }

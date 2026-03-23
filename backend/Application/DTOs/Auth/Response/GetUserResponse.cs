@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Domain;
 
 namespace Application.DTOs.Profile;
 
-public record ProfileResponse(string LastName, string FirstName, string Email);
+public record GetUserResponse(UserEntity user);

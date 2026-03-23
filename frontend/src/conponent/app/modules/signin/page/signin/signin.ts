@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {EPage} from '../../../../shared/enum/EPage';
 import {AuthService} from '../../../../core/service/auth.service';
 import {SignInRequest} from '../../../../core/models/auth.model';
+import {AuthTokenService} from '../../../../core/service/auth-token.service';
 
 @Component({
   selector: 'tc-signin',
@@ -20,6 +21,7 @@ import {SignInRequest} from '../../../../core/models/auth.model';
 export class Signin {
   private router = inject(Router);
   private readonly authService: AuthService = inject(AuthService)
+  private readonly authTokenService:AuthTokenService = inject(AuthTokenService);
 
   email: WritableSignal<string> = signal<string>('');
   password: WritableSignal<string> = signal<string>('');
@@ -35,7 +37,9 @@ export class Signin {
     }
     this.authService.signIn(payload).subscribe({
       next: result => {
-        if(result.accesToken != "") {
+        console.log(result);
+        this.authTokenService.setAccessToken(result.accessToken);
+        if(this.authTokenService.hasToken()) {
           this.router.navigate([EPage.Home]);
         }
       },

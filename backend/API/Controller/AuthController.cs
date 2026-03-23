@@ -10,11 +10,10 @@ namespace API.Controller;
 public class AuthController(AuthUseCase authUseCase) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult> GetProfile()
+    public async Task<ActionResult> GetProfile(GetUserRequest getUserRequest)
     {
-        authUseCase.Get.Execute();
-        
-        return Ok();
+        GetUserResponse getUserResponse = await authUseCase.Get.Execute(getUserRequest);
+        return Ok(getUserResponse);
     }
     
     [HttpPost("signin")]

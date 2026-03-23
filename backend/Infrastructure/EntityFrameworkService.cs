@@ -14,9 +14,10 @@ public class EntityFrameworkService : IEntityFrameworkService
         _db = db;
     }
 
-    public User GetUserById(int? userId)
+    public UserEntity GetUserById(Guid userId)
     {
-        return _db.Users.Find(userId);
+        User user = _db.Users.Find(userId);
+        return UserMapper.ToDomain(user);
     }
 
     public void AddUser(UserEntity user)

@@ -3,5 +3,5 @@
 public interface ITokenService
 {
     public string GenerateToken(Guid userId, string email); 
-    public Task<bool> ValidateToken(string token);
+    public Task<bool> IsTokenValid(string token);
 }
