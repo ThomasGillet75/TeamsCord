@@ -1,6 +1,9 @@
-﻿using Application.DTOs.Auth.Requests;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Application.DTOs.Auth.Requests;
 using Application.DTOs.Profile;
 using Application.UseCase;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controller;
@@ -10,9 +13,13 @@ namespace API.Controller;
 public class AuthController(AuthUseCase authUseCase) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult> GetProfile(GetUserRequest getUserRequest)
+    [Authorize]
+    public async Task<ActionResult> GetProfile()
     {
-        GetUserResponse getUserResponse = await authUseCase.Get.Execute(getUserRequest);
+        string? userIdClaim =
+            User.FindFirstValue(JwtRegisteredClaimNames.Sub) ??
+            User.FindFirstValue(ClaimTypes.NameIdentifier);
+        GetUserResponse getUserResponse = await authUseCase.Get.Execute(userIdClaim);
         return Ok(getUserResponse);
     }
     

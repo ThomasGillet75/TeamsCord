@@ -4,7 +4,7 @@ import {CallPage} from './modules/call/pages/call/call-page.component';
 import {Signin} from './modules/signin/page/signin/signin';
 import {Signup} from './modules/signup/page/signup/signup';
 import {EPage} from './shared/enum/EPage';
-import {authGuard} from './core/service/auth.guard';
+import {authGuard} from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {

@@ -4,9 +4,9 @@ import {Banner} from '../../../../shared/components/banner/banner';
 import {Input} from '../../../../shared/components/input/input';
 import {Router} from '@angular/router';
 import {EPage} from '../../../../shared/enum/EPage';
-import {AuthService} from '../../../../core/service/auth.service';
+import {AuthService} from '../../../../core/services/auth.service';
 import {SignInRequest} from '../../../../core/models/auth.model';
-import {AuthTokenService} from '../../../../core/service/auth-token.service';
+import {AuthTokenService} from '../../../../core/services/auth-token.service';
 
 @Component({
   selector: 'tc-signin',
@@ -30,14 +30,13 @@ export class Signin {
     this.router.navigate([EPage.Signup]);
   }
 
-  onSignin() {
+  onSignIn() {
     const payload: SignInRequest = {
       email: this.email(),
       password: this.password(),
     }
     this.authService.signIn(payload).subscribe({
       next: result => {
-        console.log(result);
         this.authTokenService.setAccessToken(result.accessToken);
         if(this.authTokenService.hasToken()) {
           this.router.navigate([EPage.Home]);

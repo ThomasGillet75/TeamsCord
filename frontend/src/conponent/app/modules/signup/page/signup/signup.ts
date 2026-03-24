@@ -4,7 +4,7 @@ import {Button} from "../../../../shared/components/button/button";
 import {Input} from '../../../../shared/components/input/input';
 import {EPage} from '../../../../shared/enum/EPage';
 import {Router} from '@angular/router';
-import {AuthService} from '../../../../core/service/auth.service';
+import {AuthService} from '../../../../core/services/auth.service';
 import {SignUpRequest, SignUpResponse} from '../../../../core/models/auth.model';
 
 @Component({

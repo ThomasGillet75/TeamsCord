@@ -3,4 +3,4 @@ using Domain;
 
 namespace Application.DTOs.Profile;
 
-public record GetUserResponse(UserEntity user);
+public record GetUserResponse(string Username);

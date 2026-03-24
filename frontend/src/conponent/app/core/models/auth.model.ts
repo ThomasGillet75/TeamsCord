@@ -20,3 +20,7 @@ export interface SignInResponse {
   refreshToken: string;
 }
 
+export interface GetUserResponse {
+  username: string;
+}
+

@@ -12,7 +12,7 @@ export class AuthTokenService{
     throw "no token";
   }
 
-  public removeAccessToken() :void{
+  public clearAccessToken() :void{
     localStorage.removeItem(this.TOKEN);
   }
 

@@ -12,41 +12,21 @@ public class TokenService : ITokenService
     private string _audience;
     private JsonWebTokenHandler _handler;
     private SigningCredentials _credentials;
-    private TokenValidationParameters _validationParameters;
-
-    public TokenService(string jwtKey, string issuer, string audience)
+    public TokenService(TokenValidationParameters validationParameters)
     {
         _handler = new JsonWebTokenHandler();
-        SymmetricSecurityKey signedKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
-        _credentials = new SigningCredentials(signedKey, SecurityAlgorithms.HmacSha256);
-        _issuer = issuer;
-        _audience = audience;
-        
-        _validationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = signedKey,
-
-            ValidateIssuer = true,
-            ValidIssuer = _issuer,
-
-            ValidateAudience = true,
-            ValidAudience = _audience,
-
-            ValidateLifetime = true,
-
-            ClockSkew = TimeSpan.FromSeconds(30)
-        };
+        _credentials = new SigningCredentials(validationParameters.IssuerSigningKey, SecurityAlgorithms.HmacSha256);
+        _issuer = validationParameters.ValidIssuer;
+        _audience = validationParameters.ValidAudience;
     }
     
-    public string GenerateToken(Guid userId, string email)
+    public string GenerateToken(Guid userId)
     {
         SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new []
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, email)
             }),
 
             Expires = DateTime.UtcNow.AddHours(24),
@@ -56,15 +36,5 @@ public class TokenService : ITokenService
         };
         
         return _handler.CreateToken(descriptor);
-    }
-    
-    public async Task<bool> IsTokenValid(string token)
-    {
-        TokenValidationResult result =  await _handler.ValidateTokenAsync(token, _validationParameters);
-        if(result.IsValid)
-        {
-            return true;
-        }
-        return false;
     }
 }
