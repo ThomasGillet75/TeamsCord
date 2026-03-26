@@ -32,7 +32,8 @@ public class AuthController(AuthUseCase authUseCase) : ControllerBase
     [HttpPost("signup")]
     public async Task<ActionResult> SignUp(SignUpRequest signUpRequest)
     {
-        authUseCase.SignUp.Execute(signUpRequest);
-        return Ok();
+        bool created = authUseCase.SignUp.Execute(signUpRequest);
+        if (created) return Ok();
+        return Conflict(new { message = "Une erreur est survenue" });
     }
 }
