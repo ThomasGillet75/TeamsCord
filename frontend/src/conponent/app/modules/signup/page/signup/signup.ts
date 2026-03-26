@@ -33,7 +33,7 @@ export class Signup {
       password: this.password(),
     }
     this.authService.signUp(payload).subscribe({
-      next: (response: SignUpResponse) => {
+      next: () => {
         this.router.navigate([EPage.Signin]);
       },
       error: (err: unknown) => {
