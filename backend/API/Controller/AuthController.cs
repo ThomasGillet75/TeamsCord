@@ -36,16 +36,4 @@ public class AuthController(AuthUseCase authUseCase) : ControllerBase
         bool signUpResponse = authUseCase.SignUp.Execute(signUpRequest);
         return Ok(signUpResponse);
     }
-
-    [HttpPut]
-    public async Task<ActionResult> UpdateProfile()
-    {
-        return Ok();
-    }
-
-    [HttpDelete]
-    public async Task<ActionResult> DeleteProfile()
-    {
-        return Ok();
-    }
 }
