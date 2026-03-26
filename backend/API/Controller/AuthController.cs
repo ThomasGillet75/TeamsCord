@@ -16,9 +16,8 @@ public class AuthController(AuthUseCase authUseCase) : ControllerBase
     [Authorize]
     public async Task<ActionResult> GetProfile()
     {
-        string? userIdClaim =
-            User.FindFirstValue(JwtRegisteredClaimNames.Sub) ??
-            User.FindFirstValue(ClaimTypes.NameIdentifier);
+        string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrWhiteSpace(userIdClaim)) return Unauthorized();
         GetUserResponse getUserResponse = await authUseCase.Get.Execute(userIdClaim);
         return Ok(getUserResponse);
     }
@@ -33,7 +32,7 @@ public class AuthController(AuthUseCase authUseCase) : ControllerBase
     [HttpPost("signup")]
     public async Task<ActionResult> SignUp(SignUpRequest signUpRequest)
     {
-        bool signUpResponse = authUseCase.SignUp.Execute(signUpRequest);
-        return Ok(signUpResponse);
+        authUseCase.SignUp.Execute(signUpRequest);
+        return Ok();
     }
 }

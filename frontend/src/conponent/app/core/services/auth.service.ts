@@ -19,8 +19,8 @@ export class AuthService {
   private readonly http: HttpClient = inject(HttpClient);
   authTokenService: AuthTokenService = inject(AuthTokenService);
 
-  signUp(payload:SignUpRequest) : Observable<SignUpResponse>{
-    return this.http.post<SignUpResponse>(AUTH_URL+"/signup", payload);
+  signUp(payload:SignUpRequest) : Observable<void>{
+    return this.http.post<void>(AUTH_URL+"/signup", payload);
   }
 
   signIn(payload:SignInRequest) : Observable<SignInResponse>{
