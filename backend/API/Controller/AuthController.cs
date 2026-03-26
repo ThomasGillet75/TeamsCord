@@ -18,19 +18,20 @@ public class AuthController(AuthUseCase authUseCase) : ControllerBase
     {
         string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (string.IsNullOrWhiteSpace(userIdClaim)) return Unauthorized();
+        
         GetUserResponse getUserResponse = await authUseCase.Get.Execute(userIdClaim);
         return Ok(getUserResponse);
     }
     
     [HttpPost("signin")]
-    public async Task<ActionResult> SignIn(SignInRequest signInRequest)
+    public async Task<ActionResult> SignIn([FromBody] SignInRequest signInRequest)
     {
         SignInResponse signInResponse = authUseCase.SignIn.Execute(signInRequest);
         return Ok(signInResponse);
     }
 
     [HttpPost("signup")]
-    public async Task<ActionResult> SignUp(SignUpRequest signUpRequest)
+    public async Task<ActionResult> SignUp([FromBody] SignUpRequest signUpRequest)
     {
         bool created = authUseCase.SignUp.Execute(signUpRequest);
         if (created) return Ok();

@@ -1,5 +1,4 @@
-﻿using Application.DTOs.Auth.Requests;
-using Application.DTOs.Profile;
+﻿using Application.DTOs.Profile;
 using Application.Interfaces;
 using Domain;
 

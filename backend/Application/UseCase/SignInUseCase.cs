@@ -18,6 +18,7 @@ public class SignInUseCase
     {
         UserEntity user = _entityFrameworkService.VerifyUser(signInRequest.Email, signInRequest.Password);
         string token =  _tokenService.GenerateToken(user.Id);
+        // TODO: Generate refresh token 
         return new SignInResponse(token, "refreshToken");
     }
 }

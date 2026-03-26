@@ -22,19 +22,33 @@ public class TokenService : ITokenService
     
     public string GenerateToken(Guid userId)
     {
-        SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(new []
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
-            }),
+        if (userId == Guid.Empty)
+            throw new ArgumentException("UserId is invalid", nameof(userId));
 
-            Expires = DateTime.UtcNow.AddHours(24),
-            Issuer = _issuer,
-            Audience = _audience,
-            SigningCredentials = _credentials
-        };
+        try
+        {
+            SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new []
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
+                }),
+
+                Expires = DateTime.UtcNow.AddHours(24),
+                Issuer = _issuer,
+                Audience = _audience,
+                SigningCredentials = _credentials
+            };
         
-        return _handler.CreateToken(descriptor);
+            return _handler.CreateToken(descriptor);
+        }catch (SecurityTokenException)
+        {
+            throw new Exception("An error occurred while generating the token");
+        }
+        catch (ArgumentNullException)
+        {
+            throw new InvalidOperationException("JWT configuration is invalid");
+        }
+
     }
 }

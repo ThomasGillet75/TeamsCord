@@ -1,4 +1,5 @@
 ﻿using API.Configuration;
+using API.Middleware;
 using Application.Interfaces;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ public static class ServicesExtension
     public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration )
     {
         EnvironmentSettings environmentSettings = new EnvironmentSettings();
+        services.AddExceptionHandler<ExceptionHandler>();
         services.AddOpenApi();
         services.AddControllers();
         services.AddScoped<IEntityFrameworkService, EntityFrameworkService>();

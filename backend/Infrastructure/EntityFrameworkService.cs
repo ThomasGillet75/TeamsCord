@@ -2,37 +2,49 @@
 using Domain;
 using Infrastructure.Mapper;
 using Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
-public class EntityFrameworkService : IEntityFrameworkService
+public class EntityFrameworkService(DatabaseContext db) : IEntityFrameworkService
 {
-    private readonly DatabaseContext _db;
-
-    public EntityFrameworkService(DatabaseContext db)
-    {
-        _db = db;
-    }
-
     public UserEntity GetUserById(Guid userId)
     {
-        User user = _db.Users.Find(userId);
+        User? user = db.Users.Find(userId);
+        if(user == null) throw new Exception("User not found");
         return UserMapper.ToDomain(user);
     }
 
     public void AddUser(UserEntity user)
     {
-        _db.Users.Add(new User(user.Username, user.Email, user.Password));
-        _db.SaveChanges();
+        try {
+            db.Users.Add(new User(user.Username, user.Email, user.Password));
+            db.SaveChanges();
+        }
+        catch (DbUpdateException)
+        {
+            throw new InvalidOperationException("error occurred while adding the user to the database");
+        }
     }
 
     public UserEntity VerifyUser(string email, string password)
     {
-        User user = _db.Users.SingleOrDefault(u => u.Email == email && u.Password == password);
-        if (user != null)
+        try
         {
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentException("email is required", nameof(email));
+
+            if (string.IsNullOrWhiteSpace(password))
+                throw new ArgumentException("password is required", nameof(password));
+            
+            User? user = db.Users.SingleOrDefault(u => u.Email == email && u.Password == password);
+            if(user == null) throw new Exception("User not found");
             return UserMapper.ToDomain(user);
         }
-        return null;
+        catch (InvalidOperationException)
+        {
+            throw new InvalidOperationException("data is not valid");
+        }
+
     }
 }
