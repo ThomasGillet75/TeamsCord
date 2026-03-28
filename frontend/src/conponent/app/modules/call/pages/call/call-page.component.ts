@@ -3,12 +3,14 @@ import {Button} from '../../../../shared/components/button/button';
 import {Channel} from '../../components/channel/channel';
 import {Member} from '../../components/member/member';
 import {AuthService} from '../../../../core/services/auth.service';
+import {ChannelAdd} from '../../components/channel-add/channel-add';
 
 @Component({
   selector: 'app-call',
   imports: [
     Channel,
-    Member
+    Member,
+    ChannelAdd
   ],
   templateUrl: './call-page.component.html',
   styleUrl: './call-page.component.css',
