@@ -1,0 +1,74 @@
+.icon-wrapper {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  filter: url('#goo');
+  cursor: pointer;
+}
+
+.dot, .arm {
+  position: absolute;
+  background: var(--secondary-color);
+}
+
+.dot {
+  border-radius: 50%;
+}
+.center {   position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease; }
+.top    { width: 12px; height: 12px; top: 0; left: 26px; }
+.bottom { width: 12px; height: 12px; top: 52px; left: 26px; }
+.left   { width: 12px; height: 12px; top: 26px; left: 0px; }
+.right  { width: 12px; height: 12px; top: 26px; left: 52px; }
+
+.arm {
+  transition: transform 0.3s ease-out;
+}
+
+.arm-top, .arm-bottom { width: 5px; height: 16px; left: 29px; }
+.arm-top {
+  top: 12px;
+  transform-origin: bottom;
+  transform: scaleY(0);
+}
+.arm-bottom {
+  top: 36px;
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+.arm-left, .arm-right { height: 5px; width: 16px; top: 29px; }
+.arm-left {
+  left: 12px;
+  transform-origin: right;
+  transform: scaleX(0);
+}
+.arm-right {
+  left: 36px;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.icon-wrapper.active .arm-top,
+.icon-wrapper.active .arm-bottom {
+  transform: scaleY(1);
+}
+
+.icon-wrapper.active .arm-left,
+.icon-wrapper.active .arm-right {
+  transform: scaleX(1);
+}
+
+.icon-wrapper.clicked .dot.center{
+  transition: width 1s ease, height 1s ease, border-radius 0.5s ease-in-out;
+  width: 250px;
+  height: 250px;
+  border-radius: 12px;
+}

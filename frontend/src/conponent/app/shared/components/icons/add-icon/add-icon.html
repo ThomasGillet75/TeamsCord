@@ -1,0 +1,21 @@
+<svg style="visibility: hidden; position: absolute;" width="0" height="0">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 15 -7" result="goo" />
+    </filter>
+  </defs>
+</svg>
+
+<div class="icon-wrapper" [class.active]="isHovered()" [class.clicked]="isClicked()">
+  <div class="arm arm-top"></div>
+  <div class="arm arm-bottom"></div>
+  <div class="arm arm-left"></div>
+  <div class="arm arm-right"></div>
+
+  <div class="dot center"></div>
+  <div class="dot top"></div>
+  <div class="dot bottom"></div>
+  <div class="dot left"></div>
+  <div class="dot right"></div>
+</div>
