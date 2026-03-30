@@ -1,4 +1,4 @@
-import {Component, input, Input, InputSignal} from '@angular/core';
+import {Component, input, Input, InputSignal, output} from '@angular/core';
 import {AddIcon} from '../../../../shared/components/icons/add-icon/add-icon';
 
 @Component({
@@ -12,7 +12,9 @@ import {AddIcon} from '../../../../shared/components/icons/add-icon/add-icon';
 export class ChannelAdd {
   hoverState: boolean = false;
   isClicked: boolean = false;
+  onClick =  output<void>();
   addChannel = () :void => {
     this.isClicked = !this.isClicked;
+    this.onClick.emit();
   }
 }

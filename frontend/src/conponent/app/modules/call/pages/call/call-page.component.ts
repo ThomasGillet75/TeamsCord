@@ -17,6 +17,12 @@ import {ChannelAdd} from '../../components/channel-add/channel-add';
 })
 export class CallPage {
     authService:AuthService = inject(AuthService);
+    channels: string[] = [];
+    onAddChannel() : void
+    {
+      console.log(this.channels);
+      this.channels.push("Channel");
+    }
 
     ngOnInit():void {
       this.authService.getUser().subscribe({
