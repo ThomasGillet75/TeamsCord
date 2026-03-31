@@ -1,0 +1,16 @@
+.channel-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+}
+
+.channel-container > tc-channel-add,
+.channel-container > tc-channel-config {
+  display: block;
+}
+
+.channel-container > tc-channel-config {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}

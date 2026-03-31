@@ -1,5 +1,6 @@
 import {Component, input, Input, InputSignal, output} from '@angular/core';
 import {AddIcon} from '../../../../shared/components/icons/add-icon/add-icon';
+import {delay} from 'rxjs';
 
 @Component({
   selector: 'tc-channel-add',
@@ -15,6 +16,8 @@ export class ChannelAdd {
   onClick =  output<void>();
   addChannel = () :void => {
     this.isClicked = !this.isClicked;
-    this.onClick.emit();
+    window.setTimeout((): void => {
+      this.onClick.emit();
+    }, 0);
   }
 }

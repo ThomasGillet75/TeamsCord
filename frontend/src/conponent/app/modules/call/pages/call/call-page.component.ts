@@ -4,13 +4,17 @@ import {Channel} from '../../components/channel/channel';
 import {Member} from '../../components/member/member';
 import {AuthService} from '../../../../core/services/auth.service';
 import {ChannelAdd} from '../../components/channel-add/channel-add';
+import {ChannelConfig} from '../../components/channel-config/channel-config';
+import {ChannelContainer} from '../../components/channel-container/channel-container';
 
 @Component({
   selector: 'app-call',
   imports: [
     Channel,
     Member,
-    ChannelAdd
+    ChannelAdd,
+    ChannelConfig,
+    ChannelContainer
   ],
   templateUrl: './call-page.component.html',
   styleUrl: './call-page.component.css',

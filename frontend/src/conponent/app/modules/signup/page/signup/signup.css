@@ -2,4 +2,5 @@
   background-color: var(--tertiary-color);
   padding: 32px;
   border-radius: 8px;
+  width: 300px;
 }

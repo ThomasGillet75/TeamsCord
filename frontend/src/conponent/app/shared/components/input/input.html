@@ -1,4 +1,4 @@
 <div class="gap">
-  <p class="text">{{ title() }}</p>
-  <input class="input" [type]="type()" [value]="value()" (input)="onInput($event)"/>
+  <p [ngClass]="['text', variant()]">{{ title() }}</p>
+  <input [ngClass]="['input', variant()]" [type]="type()" [value]="value()" (input)="onInput($event)" />
 </div>

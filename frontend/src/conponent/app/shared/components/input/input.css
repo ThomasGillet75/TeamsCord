@@ -1,9 +1,9 @@
-.input{
+.input.primary{
   border: none;
   box-shadow: 0 0 8px 3px rgba(0,0,0,0.2) inset;
   border-radius: 8px;
   height: 48px;
-  width: 254px;
+  width: 100%;
   background-color: var(--main-color);
   color: var(--text-color-grey);
   padding: 0 8px ;
@@ -11,8 +11,27 @@
   font-size: 14px;
 }
 
-.text{
+.text.primary{
   color: var(--text-color-grey);
+  font-family: var(--font-engine);
+  font-size: 18px;
+}
+
+.input.secondary{
+  border: none;
+  box-shadow: 0 0 8px 3px rgba(0,0,0,0.2) inset;
+  border-radius: 8px;
+  height: 48px;
+  width: 100%;
+  background-color: var(--secondary-color);
+  color: var(--text-color-grey);
+  padding: 0 8px ;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.text.secondary{
+  color: var(--text-color-dark);
   font-family: var(--font-engine);
   font-size: 18px;
 }
