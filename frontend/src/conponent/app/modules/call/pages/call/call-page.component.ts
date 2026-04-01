@@ -6,13 +6,16 @@ import {AuthService} from '../../../../core/services/auth.service';
 import {ChannelAdd} from '../../components/channel-add/channel-add';
 import {ChannelConfig} from '../../components/channel-config/channel-config';
 import {ChannelAddContainer} from '../../components/channel-add-container/channel-add-container';
+import {Banner} from '../../../../shared/components/banner/banner';
+import {Header} from '../../components/header/header';
 
 @Component({
   selector: 'app-call',
   imports: [
     Channel,
     Member,
-    ChannelAddContainer
+    ChannelAddContainer,
+    Header
   ],
   templateUrl: './call-page.component.html',
   styleUrl: './call-page.component.css',

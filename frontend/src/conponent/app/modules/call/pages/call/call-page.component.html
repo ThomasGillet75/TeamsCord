@@ -1,9 +1,11 @@
-<div class="call-page gap">
-  @for (channel of channels; track channel){
-    <app-channel [name]=channel>
-      <app-member memberName="Thomas" />
-      <app-member memberName="Thomas" />
-    </app-channel>
-  }
-  <tc-channel-add-container (onValidate)="onAddChannel($event)"/>
+<div class="call-page">
+  <tc-header>Serveur</tc-header>
+  <div class="flex-row call-page-content gap">
+    @for (channel of channels; track channel){
+      <app-channel [name]=channel>
+        <app-member memberName="Thomas" />
+      </app-channel>
+    }
+    <tc-channel-add-container (onValidate)="onAddChannel($event)"/>
+  </div>
 </div>

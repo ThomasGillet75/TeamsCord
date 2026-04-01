@@ -1,7 +1,9 @@
 .call-page{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
+}
+
+.call-page-content{
   margin: 16px;
+  display: flex;
+  flex-wrap: wrap;
+
 }
