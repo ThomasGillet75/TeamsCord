@@ -1,0 +1,19 @@
+.server-item {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--tertiary-color);
+  color: var(--text-color-white);
+  padding: 10px 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.server-item:hover {
+  background-color: #3a3e53;
+}
+
+.server-item-selected {
+  background-color: var(--secondary-color);
+}
+

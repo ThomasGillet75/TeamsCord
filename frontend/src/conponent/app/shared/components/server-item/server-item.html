@@ -1,0 +1,9 @@
+<button
+  type="button"
+  class="server-item"
+  [class.server-item-selected]="isSelected()"
+  (click)="onSelect.emit()"
+>
+  {{ name() }}
+</button>
+

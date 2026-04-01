@@ -1,0 +1,34 @@
+.server-sidebar {
+  max-width: 260px;
+  background-color: var(--accent-color);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.server-sidebar h3 {
+  color: var(--text-color-white);
+  font-family: var(--font-engine);
+}
+
+.server-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-add {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-add input {
+  border: 1px solid #4c5269;
+  border-radius: 8px;
+  background-color: #1f2130;
+  color: var(--text-color-white);
+  padding: 10px 12px;
+}
+

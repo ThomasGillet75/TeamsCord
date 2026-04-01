@@ -1,9 +1,20 @@
-.call-page{
+.call-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.call-layout {
+  flex: 1;
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+
 }
 
 .call-page-content{
-  margin: 16px;
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
-
+  align-content: flex-start;
 }

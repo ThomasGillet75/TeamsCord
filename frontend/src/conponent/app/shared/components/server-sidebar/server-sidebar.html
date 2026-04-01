@@ -1,0 +1,23 @@
+<aside class="server-sidebar">
+  <div class="server-list gap">
+    @for (server of servers(); track server.id) {
+      <tc-server-item
+        [name]="server.name"
+        [isSelected]="selectedServerId() === server.id"
+        (onSelect)="onSelectServer.emit(server.id)"
+      />
+    }
+  </div>
+
+  <div class="sidebar-add gap">
+    <input
+      type="text"
+      placeholder="Nouveau serveur"
+      [value]="newServerName"
+      (input)="onServerNameInput($event)"
+      (keydown.enter)="onCreateServer()"
+    />
+    <tc-button variant="secondary" (click)="onCreateServer()">Ajouter</tc-button>
+  </div>
+</aside>
+
