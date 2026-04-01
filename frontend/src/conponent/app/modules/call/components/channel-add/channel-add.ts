@@ -12,12 +12,8 @@ import {delay} from 'rxjs';
 })
 export class ChannelAdd {
   hoverState: boolean = false;
-  isClicked: boolean = false;
   onClick =  output<void>();
   addChannel = () :void => {
-    this.isClicked = !this.isClicked;
-    window.setTimeout((): void => {
-      this.onClick.emit();
-    }, 0);
+    this.onClick.emit();
   }
 }

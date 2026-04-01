@@ -65,10 +65,3 @@
 .icon-wrapper.active .arm-right {
   transform: scaleX(1);
 }
-
-.icon-wrapper.clicked .dot.center{
-  transition: width 1s ease, height 1s ease, border-radius 0.5s ease-in-out;
-  width: 250px;
-  height: 250px;
-  border-radius: 12px;
-}

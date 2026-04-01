@@ -5,16 +5,14 @@ import {Member} from '../../components/member/member';
 import {AuthService} from '../../../../core/services/auth.service';
 import {ChannelAdd} from '../../components/channel-add/channel-add';
 import {ChannelConfig} from '../../components/channel-config/channel-config';
-import {ChannelContainer} from '../../components/channel-container/channel-container';
+import {ChannelAddContainer} from '../../components/channel-add-container/channel-add-container';
 
 @Component({
   selector: 'app-call',
   imports: [
     Channel,
     Member,
-    ChannelAdd,
-    ChannelConfig,
-    ChannelContainer
+    ChannelAddContainer
   ],
   templateUrl: './call-page.component.html',
   styleUrl: './call-page.component.css',
@@ -22,10 +20,10 @@ import {ChannelContainer} from '../../components/channel-container/channel-conta
 export class CallPage {
     authService:AuthService = inject(AuthService);
     channels: string[] = [];
-    onAddChannel() : void
+    onAddChannel(name:string) : void
     {
-      console.log(this.channels);
-      this.channels.push("Channel");
+      console.log(name);
+      this.channels.push(name);
     }
 
     ngOnInit():void {

@@ -1,6 +1,6 @@
 <div class="channel-container">
   <tc-channel-add (onClick)="onChangeAdd()"/>
   @if(!change){
-    <tc-channel-config/>
+    <tc-channel-config (onChange)="onChangeAdd()" (onValidate)="onValidate.emit($event)"/>
   }
 </div>

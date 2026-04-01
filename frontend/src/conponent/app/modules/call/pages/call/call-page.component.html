@@ -5,6 +5,5 @@
       <app-member memberName="Thomas" />
     </app-channel>
   }
-  <tc-channel-container/>
-  <tc-channel-add (onClick)="onAddChannel()"/>
+  <tc-channel-add-container (onValidate)="onAddChannel($event)"/>
 </div>
