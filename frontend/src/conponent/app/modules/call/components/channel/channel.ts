@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
 import {Button} from '../../../../shared/components/button/button';
 
 @Component({
@@ -10,7 +10,7 @@ import {Button} from '../../../../shared/components/button/button';
   styleUrl: './channel.css',
 })
 export class Channel {
-  protected readonly name : string = "Channel";
+  name : InputSignal<string> = input<string>("Channel");
   onClickJoin() : void{
     console.log("test");
   }
