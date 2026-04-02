@@ -1,5 +1,4 @@
-﻿using Application.UseCase;
-
+﻿using Application.UseCase.Auth;
 namespace API.Extension;
 
 public static class UseCaseExtension

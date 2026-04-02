@@ -2,7 +2,7 @@
 using Application.Interfaces;
 using Domain;
 
-namespace Application.UseCase;
+namespace Application.UseCase.Auth;
 
 public class GetProfileUseCase
 {

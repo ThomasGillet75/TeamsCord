@@ -17,6 +17,7 @@ public class User
     public required string Email { get; set; }
     [MaxLength(50)]
     public required string Password { get; set; }
+    public ICollection<Member> Members { get; set; } = new List<Member>();
 
     [SetsRequiredMembers]
     public User(string username, string email, string password)

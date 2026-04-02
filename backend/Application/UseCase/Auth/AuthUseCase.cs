@@ -1,4 +1,4 @@
-﻿namespace Application.UseCase;
+﻿namespace Application.UseCase.Auth;
 
 public record AuthUseCase(
     GetProfileUseCase Get,

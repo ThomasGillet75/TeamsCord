@@ -1,8 +1,7 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Application.DTOs.Auth.Requests;
 using Application.DTOs.Profile;
-using Application.UseCase;
+using Application.UseCase.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
