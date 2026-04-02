@@ -3,7 +3,7 @@ using Infrastructure.Models;
 
 namespace Infrastructure.Mapper;
 
-public static class UserMapper{
+public static class UserMapper {
     public static UserEntity ToDomain(User model)
         => new UserEntity(model.Id,model.Username, model.Email, model.Password);
 

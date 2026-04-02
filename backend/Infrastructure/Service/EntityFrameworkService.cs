@@ -1,12 +1,14 @@
 ﻿using Application.Interfaces;
 using Domain;
+using Domain.Entity;
+using Infrastructure.Interfaces.Repositories;
 using Infrastructure.Mapper;
 using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
-public class EntityFrameworkService(DatabaseContext db) : IEntityFrameworkService
+public class EntityFrameworkService(DatabaseContext db, IServerRepository serverRepository) : IEntityFrameworkService
 {
     public UserEntity GetUserById(Guid userId)
     {
@@ -45,6 +47,22 @@ public class EntityFrameworkService(DatabaseContext db) : IEntityFrameworkServic
         {
             throw new InvalidOperationException("data is not valid");
         }
-
+    }
+    
+    public IReadOnlyList<ServerEntity> GetUserServers(Guid userId)
+    {
+        return serverRepository.GetUserServersAsync(userId).Result.Select(s => ServerMapper.ToDomain(s)).ToList();
+    }
+    
+    public void AddServer(ServerEntity server)
+    {
+        try
+        {
+            serverRepository.AddServerAsync(ServerMapper.ToModel(server));
+        }
+        catch (DbUpdateException)
+        {
+            throw new InvalidOperationException("error occurred while adding the server to the database");
+        }
     }
 }

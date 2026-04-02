@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Models;
@@ -19,4 +20,21 @@ public class Server
     
     public ICollection<Channel> Channels { get; set; } = new List<Channel>();
     public ICollection<Member> Members { get; set; } = new List<Member>();
+
+    [SetsRequiredMembers]
+    public Server(Guid id, string name, string icon)
+    {
+        Id = id;
+        Name = name;
+        Icon = icon;
+    }
+    [SetsRequiredMembers]
+    public Server(string name, string icon)
+    {
+        Id = Guid.NewGuid();
+        Name = name;
+        Icon = icon;
+    }
+
+
 }
