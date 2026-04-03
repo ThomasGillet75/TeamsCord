@@ -1,21 +1,15 @@
 ﻿using Application.DTOs.Auth.Requests;
 using Application.Interfaces;
 using Domain;
+using Infrastructure;
 
 namespace Application.UseCase.Auth;
 
-public class SignUpUseCase
+public class SignUpUseCase(IUserEFService userEFService)
 {
-    IEntityFrameworkService _entityFrameworkService;
-
-    public SignUpUseCase(IEntityFrameworkService service)
-    {
-        _entityFrameworkService = service;
-    }
-
     public bool Execute(SignUpRequest signUpUseRequest)
     {
-        _entityFrameworkService.AddUser(new UserEntity(signUpUseRequest.Username, signUpUseRequest.Email,signUpUseRequest.Password));
+        userEFService.AddUser(new UserEntity(signUpUseRequest.Username, signUpUseRequest.Email,signUpUseRequest.Password));
         return true; 
     }
 }

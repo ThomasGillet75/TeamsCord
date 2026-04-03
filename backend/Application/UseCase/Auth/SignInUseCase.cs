@@ -2,22 +2,15 @@
 using Application.DTOs.Profile;
 using Application.Interfaces;
 using Domain;
+using Infrastructure;
 
 namespace Application.UseCase.Auth;
 
-public class SignInUseCase
-{
-    IEntityFrameworkService _entityFrameworkService;
-    ITokenService _tokenService;
-    public SignInUseCase(IEntityFrameworkService service, ITokenService tokenService)
+public class SignInUseCase(IUserEFService userEFService, ITokenService tokenService)
+{ public SignInResponse Execute(SignInRequest signInRequest)
     {
-        _entityFrameworkService = service;
-        _tokenService = tokenService;
-    }
-    public SignInResponse Execute(SignInRequest signInRequest)
-    {
-        UserEntity user = _entityFrameworkService.VerifyUser(signInRequest.Email, signInRequest.Password);
-        string token =  _tokenService.GenerateToken(user.Id);
+        UserEntity user = userEFService.VerifyUser(signInRequest.Email, signInRequest.Password);
+        string token =  tokenService.GenerateToken(user.Id);
         // TODO: Generate refresh token 
         return new SignInResponse(token, "refreshToken");
     }

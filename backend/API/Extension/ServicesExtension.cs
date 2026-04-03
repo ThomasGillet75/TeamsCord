@@ -2,6 +2,8 @@
 using API.Middleware;
 using Application.Interfaces;
 using Infrastructure;
+using Infrastructure.Interfaces.Repositories;
+using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extension;
@@ -14,7 +16,11 @@ public static class ServicesExtension
         services.AddExceptionHandler<ExceptionHandler>();
         services.AddOpenApi();
         services.AddControllers();
-        services.AddScoped<IEntityFrameworkService, EntityFrameworkService>();
+        
+        services.AddScoped<IUserEFService, UserEFService>();
+        services.AddScoped<IServerChannelEFService, ServerChannelEFService>();
+        services.AddScoped<IServerRepository, ServerRepository>();
+        
         services.AddDbContext<DatabaseContext>(options => options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
         services.AddJwtAuthentication(
             environmentSettings.Jwt.Secret,

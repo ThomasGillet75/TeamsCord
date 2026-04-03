@@ -1,21 +1,15 @@
 ﻿using Application.DTOs.Profile;
 using Application.Interfaces;
 using Domain;
+using Infrastructure;
 
 namespace Application.UseCase.Auth;
 
-public class GetProfileUseCase
+public class GetProfileUseCase(IUserEFService userEFService)
 {
-    IEntityFrameworkService _entityFrameworkService;
-
-    public GetProfileUseCase(IEntityFrameworkService service, ITokenService tokenService)
-    {
-        _entityFrameworkService = service;
-    }
-
     public async Task<GetUserResponse> Execute(string userId)
     {
-        UserEntity userEntity = _entityFrameworkService.GetUserById(Guid.Parse(userId));
+        UserEntity userEntity = userEFService.GetUserById(Guid.Parse(userId));
         return new GetUserResponse(userEntity.Username);
     }
 }

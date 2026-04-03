@@ -16,4 +16,11 @@ public class ServerEntity
         Name = name;
         Icon = icon;
     }
+
+    public ServerEntity(string name, string icon)
+    {
+        Id = Guid.NewGuid();
+        Name = name;
+        Icon = icon;
+    }
 }

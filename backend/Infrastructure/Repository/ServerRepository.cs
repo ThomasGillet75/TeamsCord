@@ -11,9 +11,9 @@ public class ServerRepository(DatabaseContext db) : IServerRepository
         return await db.Members .Where(m => m.UserId == userId)
             .Join(
                 db.Servers,
-                m => m.ServerId,
-                s => s.Id,
-                (m, s) => s)
+                member => member.ServerId,
+                server => server.Id,
+                (member, server) => server)
             .Distinct()
             .ToListAsync(cancellationToken);
     }

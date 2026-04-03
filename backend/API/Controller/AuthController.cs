@@ -36,4 +36,6 @@ public class AuthController(AuthUseCase authUseCase) : ControllerBase
         if (created) return Ok();
         return Conflict(new { message = "Une erreur est survenue" });
     }
+    
+    
 }
