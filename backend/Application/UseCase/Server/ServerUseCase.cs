@@ -2,5 +2,6 @@
 
 public record ServerUseCase
 (
-    GetServersUseCase GetServers
+    GetServersUseCase GetServers,
+    AddServerUseCase AddServer
 );

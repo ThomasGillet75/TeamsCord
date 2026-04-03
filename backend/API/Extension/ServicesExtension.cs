@@ -20,6 +20,8 @@ public static class ServicesExtension
         services.AddScoped<IUserEFService, UserEFService>();
         services.AddScoped<IServerChannelEFService, ServerChannelEFService>();
         services.AddScoped<IServerRepository, ServerRepository>();
+        services.AddScoped<IMemberRepository, MemberRepository>();
+        services.AddScoped<IChannelRepository, ChannelRepository>(); 
         
         services.AddDbContext<DatabaseContext>(options => options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
         services.AddJwtAuthentication(

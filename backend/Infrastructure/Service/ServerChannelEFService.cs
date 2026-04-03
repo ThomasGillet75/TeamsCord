@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Domain;
 using Domain.Entity;
 using Infrastructure.Interfaces.Repositories;
 using Infrastructure.Mapper;
@@ -7,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
-public class ServerChannelEFService(DatabaseContext db, IServerRepository serverRepository) : IServerChannelEFService
+public class ServerChannelEFService(IServerRepository serverRepository, IMemberRepository memberRepository) : IServerChannelEFService
 {
     public async Task<IReadOnlyList<ServerEntity>> GetUserServersAsync(Guid userId)
     {
@@ -16,12 +17,20 @@ public class ServerChannelEFService(DatabaseContext db, IServerRepository server
         return servers.Select(ServerMapper.ToDomain).ToList();
     }
 
-    public void AddServerAsync(ServerEntity server, Guid userId)
+    public void AddServerAsync(ServerEntity serverEntity, Guid userId)
     {
-        if (server is null) throw new ArgumentNullException(nameof(server));
+        if (serverEntity is null) throw new ArgumentNullException(nameof(serverEntity));
         try
         {
-            serverRepository.AddServerAsync(ServerMapper.ToModel(server));
+            Server server = ServerMapper.ToModel(serverEntity);
+            serverRepository.AddServerAsync(server);
+            memberRepository.AddMember(new Member
+            {
+                ServerId = server.Id,
+                UserId = userId,
+                Role = ERole.Admin
+            });
+            
             
         }
         catch (DbUpdateException)

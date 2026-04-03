@@ -14,7 +14,7 @@ public class Member
     public Guid ServerId { get; set; }
     [ForeignKey(nameof(User))]
     public Guid UserId { get; set; }
-    public EPermission Permission { get; set; }    
+    public ERole Role { get; set; }    
     
     public Server? Server { get; set; }
     public User? User { get; set; }

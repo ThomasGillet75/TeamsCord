@@ -46,7 +46,7 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("ServerId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Permission")
+                    b.Property<int>("Role")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("UserId", "ServerId");

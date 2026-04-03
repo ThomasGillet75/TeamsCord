@@ -1,6 +1,6 @@
 ﻿namespace Domain;
 
-public enum EPermission
+public enum ERole
 {
     Admin,
     Member,
