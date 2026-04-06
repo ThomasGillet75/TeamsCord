@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
-public class ServerChannelEFService(IServerRepository serverRepository, IMemberRepository memberRepository) : IServerChannelEFService
+public class ServerChannelEFService(IServerRepository serverRepository, IChannelRepository channelRepository, IMemberRepository memberRepository) : IServerChannelEFService
 {
     public async Task<IReadOnlyList<ServerEntity>> GetUserServersAsync(Guid userId)
     {
@@ -23,19 +23,42 @@ public class ServerChannelEFService(IServerRepository serverRepository, IMemberR
         try
         {
             Server server = ServerMapper.ToModel(serverEntity);
-            serverRepository.AddServerAsync(server);
-            memberRepository.AddMember(new Member
+            Member newMember = new Member
             {
                 ServerId = server.Id,
                 UserId = userId,
                 Role = ERole.Admin
-            });
+            };
             
-            
+            serverRepository.AddServer(server);
+            memberRepository.AddMember(newMember);
         }
         catch (DbUpdateException)
         {
             throw new InvalidOperationException("error occurred while adding the server to the database");
         }
     }
+    
+    public void AddChannelAsync(ChannelEntity channelEntity)
+    {
+        if (channelEntity is null) throw new ArgumentNullException(nameof(channelEntity));
+        try
+        {
+            Channel channel = ChannelMapper.ToModel(channelEntity);
+            channelRepository.AddChannel(channel);
+        }
+        catch (DbUpdateException)
+        {
+            throw new InvalidOperationException("error occurred while adding the channel to the database");
+        }
+    }
+    
+    public async Task<IReadOnlyList<ChannelEntity>> GetChannelsByServerIdAsync(Guid serverId)
+    {
+        if(serverId != Guid.Empty) throw new ArgumentException("serverId is required", nameof(serverId));
+        IReadOnlyList<Channel> channels = await channelRepository.GetServerChannelsAsync(serverId);
+        return channels.Select(ChannelMapper.ToDomain).ToList();
+    }
+    
+    
 }

@@ -18,7 +18,7 @@ public class ServerRepository(DatabaseContext db) : IServerRepository
             .ToListAsync(cancellationToken);
     }
     
-    public async void AddServerAsync(Server server, CancellationToken cancellationToken = default)
+    public async void AddServer(Server server, CancellationToken cancellationToken = default)
     {
         await db.Servers.AddAsync(server, cancellationToken);
         await db.SaveChangesAsync(cancellationToken);

@@ -1,13 +1,14 @@
 ﻿using Infrastructure.Interfaces.Repositories;
 using Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repository;
 
 public class ChannelRepository(DatabaseContext db) : IChannelRepository
 {
-    public Task<IReadOnlyList<Channel>> GetServerChannelsAsync(Guid serverId, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<Channel>> GetServerChannelsAsync(Guid serverId, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await db.Channels.Where(channel => channel.ServerId == serverId).ToListAsync(cancellationToken);
     }
 
     public void AddChannel(Channel channel, CancellationToken cancellationToken = default)
@@ -16,4 +17,3 @@ public class ChannelRepository(DatabaseContext db) : IChannelRepository
         db.SaveChanges();
     }
 }
-

@@ -3,5 +3,7 @@
 public record ServerUseCase
 (
     GetServersUseCase GetServers,
-    AddServerUseCase AddServer
+    AddServerUseCase AddServer,
+    GetChannelsUseCase GetChannels,
+    AddChannelUseCase AddChannel
 );

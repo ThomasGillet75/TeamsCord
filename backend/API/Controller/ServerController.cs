@@ -3,6 +3,7 @@ using Application.DTOs.Server.Requests;
 using Application.UseCase.Server;
 using Domain.Entity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controller;
@@ -20,6 +21,7 @@ public class ServerController(ServerUseCase serverUseCase) : ControllerBase
         return Ok(serverUseCase.GetServers.Execute(userIdClaim));
     }
     
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult> AddServer(PostServerRequest postServerRequest)
     {
@@ -28,5 +30,19 @@ public class ServerController(ServerUseCase serverUseCase) : ControllerBase
         serverUseCase.AddServer.Execute(postServerRequest, userIdClaim);
         return Ok();
     }
-    
+
+    [Authorize]
+    [HttpGet("{serverId}")]
+    public async Task<ActionResult> GetChannels(Guid serverId)
+    {
+        return Ok(await serverUseCase.GetChannels.Execute(serverId.ToString()));
+    }
+
+    [Authorize]
+    [HttpPost("channel")]
+    public async Task<ActionResult>  AddChannel(PostChannelRequest postChannelRequest)
+    {
+        serverUseCase.AddChannel.Execute(postChannelRequest);
+        return Ok();
+    }
 }
