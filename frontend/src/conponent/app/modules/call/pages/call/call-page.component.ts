@@ -28,60 +28,76 @@ export class CallPage implements OnInit {
   readonly selectedServer: WritableSignal<Server | null> = signal<Server | null>(null);
   readonly channels: WritableSignal<ReadonlyArray<ChannelModel>> = signal<ReadonlyArray<ChannelModel>>([]);
 
-    async loadServers(): Promise<void> {
-      const response = await firstValueFrom(this.serverService.getServers());
-      this.servers.set(response.servers);
+  async loadServers(): Promise<void> {
+    if (this.selectedServer() != null) {
+      this.servers.set([]);
+    }
+    const response = await firstValueFrom(this.serverService.getServers());
+    this.servers.set(response.servers);
+    if (this.selectedServer() == null) {
       this.selectedServer.set(response.servers[0]);
     }
+  }
 
-    async loadChannels(): Promise<void> {
-      const server: Server | null = this.selectedServer();
-      if (server === null) {
-        this.channels.set([]);
-        return;
-      }
-
-      const response = await firstValueFrom(
-        this.serverService.getChannels({ serverId: server.id })
-      );
-      this.channels.set(response.channels);
+  async loadChannels(): Promise<void> {
+    const server: Server | null = this.selectedServer();
+    if (server === null) {
+      this.channels.set([]);
+      return;
     }
 
-    async onAddChannel(name:string) : Promise<void>
-    {
-      const server: Server | null = this.selectedServer();
-      const trimmedName: string = name.trim();
+    const response = await firstValueFrom(
+      this.serverService.getChannels({serverId: server.id})
+    );
+    this.channels.set(response.channels);
+  }
 
-      if (trimmedName.length === 0 || server === null) {
-        return;
-      }
+  async onAddChannel(name: string): Promise<void> {
+    const server: Server | null = this.selectedServer();
+    const trimmedName: string = name.trim();
 
-      this.serverService.addChannel({ name: trimmedName, serverId: server.id}).subscribe(error => { console.log(error); });
-      await this.loadChannels()
+    if (trimmedName.length === 0 || server === null) {
+      return;
     }
 
-    async onSelectServer(server: Server): Promise<void> {
-      this.selectedServer.set(server);
-      await this.loadChannels()
-
-    }
-
-    async onAddServer(serverName: string): Promise<void> {
-      const trimmedName: string = serverName.trim();
-
-      if (trimmedName.length === 0) {
-        return;
-      }
-      this.serverService.addServer({ name: trimmedName }).subscribe(error => { console.log(error); });
-      await this.loadServers();
-    }
-
-    ngOnInit(): void {
-        this.initData().then(() => {console.log('Data initialized successfully');}).catch((error) => {console.error('Data initialization failed:', error);});
-    }
-
-    private async initData(): Promise<void> {
-      await this.loadServers();
+    try {
+      await firstValueFrom(this.serverService.addChannel({name: trimmedName, serverId: server.id}));
       await this.loadChannels();
+    } catch (error: unknown) {
+      console.error('Failed to add channel:', error);
     }
+  }
+
+  async onSelectServer(server: Server): Promise<void> {
+    this.selectedServer.set(server);
+    await this.loadChannels()
+
+  }
+
+  async onAddServer(serverName: string): Promise<void> {
+    const trimmedName: string = serverName.trim();
+
+    if (trimmedName.length === 0) {
+      return;
+    }
+    try {
+      await firstValueFrom(this.serverService.addServer({name: trimmedName}));
+      await this.loadServers();
+    } catch (error: unknown) {
+      console.error('Failed to add server:', error);
+    }
+  }
+
+  ngOnInit(): void {
+    this.initData().then(() => {
+      console.log('Data initialized successfully');
+    }).catch((error) => {
+      console.error('Data initialization failed:', error);
+    });
+  }
+
+  private async initData(): Promise<void> {
+    await this.loadServers();
+    await this.loadChannels();
+  }
 }
