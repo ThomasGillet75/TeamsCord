@@ -1,108 +1,87 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {Channel} from '../../components/channel/channel';
 import {Member} from '../../components/member/member';
-import {AuthService} from '../../../../core/services/auth.service';
 import {ChannelAddContainer} from '../../components/channel-add-container/channel-add-container';
 import {Header} from '../../components/header/header';
 import {ServerSidebar} from '../../../../shared/components/server-sidebar/server-sidebar';
-import {ServerSummary} from '../../../../core/models/server.model';
-
-interface ServerWithChannels extends ServerSummary {
-  channels: string[];
-}
+import {Server} from '../../../../core/models/server.model';
+import {ServerService} from '../../../../core/services/server.service';
+import {firstValueFrom} from 'rxjs';
+import {ChannelModel} from '../../../../core/models/channel.model';
 
 @Component({
   selector: 'app-call',
   imports: [
-    Channel,
     Member,
     ChannelAddContainer,
     Header,
-    ServerSidebar
+    ServerSidebar,
+    Channel
   ],
   templateUrl: './call-page.component.html',
   styleUrl: './call-page.component.css',
 })
 export class CallPage implements OnInit {
-    authService:AuthService = inject(AuthService);
-    servers: ServerWithChannels[] = [
-      { id: 1, name: 'Serveur', channels: ['General', 'Frontend'] },
-      { id: 2, name: 'Gaming', channels: ['LFG', 'Clips'] }
-    ];
-    selectedServerId: number | null = this.servers[0]?.id ?? null;
+  private readonly serverService: ServerService = inject(ServerService);
 
-    get channels(): string[] {
-      const selectedServer: ServerWithChannels | undefined = this.servers.find(
-        (server: ServerWithChannels) => server.id === this.selectedServerId
-      );
+  readonly servers: WritableSignal<ReadonlyArray<Server>> = signal<ReadonlyArray<Server>>([]);
+  readonly selectedServer: WritableSignal<Server | null> = signal<Server | null>(null);
+  readonly channels: WritableSignal<ReadonlyArray<ChannelModel>> = signal<ReadonlyArray<ChannelModel>>([]);
 
-      return selectedServer?.channels ?? [];
+    async loadServers(): Promise<void> {
+      const response = await firstValueFrom(this.serverService.getServers());
+      this.servers.set(response.servers);
+      this.selectedServer.set(response.servers[0]);
     }
 
-    get selectedServerName(): string {
-      const selectedServer: ServerWithChannels | undefined = this.servers.find(
-        (server: ServerWithChannels) => server.id === this.selectedServerId
-      );
-
-      return selectedServer?.name ?? 'Serveur';
-    }
-
-    onAddChannel(name:string) : void
-    {
-      const trimmedName: string = name.trim();
-
-      if (trimmedName.length === 0 || this.selectedServerId === null) {
+    async loadChannels(): Promise<void> {
+      const server: Server | null = this.selectedServer();
+      if (server === null) {
+        this.channels.set([]);
         return;
       }
 
-      this.servers = this.servers.map((server: ServerWithChannels) => {
-        if (server.id !== this.selectedServerId) {
-          return server;
-        }
-
-        return {
-          ...server,
-          channels: [...server.channels, trimmedName]
-        };
-      });
+      const response = await firstValueFrom(
+        this.serverService.getChannels({ serverId: server.id })
+      );
+      this.channels.set(response.channels);
     }
 
-    onSelectServer(serverId: number): void {
-      this.selectedServerId = serverId;
+    async onAddChannel(name:string) : Promise<void>
+    {
+      const server: Server | null = this.selectedServer();
+      const trimmedName: string = name.trim();
+
+      if (trimmedName.length === 0 || server === null) {
+        return;
+      }
+
+      this.serverService.addChannel({ name: trimmedName, serverId: server.id}).subscribe(error => { console.log(error); });
+      await this.loadChannels()
     }
 
-    onAddServer(serverName: string): void {
+    async onSelectServer(server: Server): Promise<void> {
+      this.selectedServer.set(server);
+      await this.loadChannels()
+
+    }
+
+    async onAddServer(serverName: string): Promise<void> {
       const trimmedName: string = serverName.trim();
 
       if (trimmedName.length === 0) {
         return;
       }
-
-      const maxServerId: number = this.servers.reduce(
-        (maxId: number, server: ServerWithChannels) => Math.max(maxId, server.id),
-        0
-      );
-      const nextServerId: number = maxServerId + 1;
-
-      this.servers = [
-        ...this.servers,
-        {
-          id: nextServerId,
-          name: trimmedName,
-          channels: []
-        }
-      ];
-      this.selectedServerId = nextServerId;
+      this.serverService.addServer({ name: trimmedName }).subscribe(error => { console.log(error); });
+      await this.loadServers();
     }
 
-    ngOnInit():void {
-      this.authService.getUser().subscribe({
-        next: result => {
-          console.log(result);
-        },
-        error: error => {
-          console.log(error);
-        }
-      })
+    ngOnInit(): void {
+        this.initData().then(() => {console.log('Data initialized successfully');}).catch((error) => {console.error('Data initialization failed:', error);});
+    }
+
+    private async initData(): Promise<void> {
+      await this.loadServers();
+      await this.loadChannels();
     }
 }

@@ -12,7 +12,7 @@ public class ServerChannelEFService(IServerRepository serverRepository, IChannel
 {
     public async Task<IReadOnlyList<ServerEntity>> GetUserServersAsync(Guid userId)
     {
-        if (userId != Guid.Empty) throw new ArgumentException("userId is required", nameof(userId));
+        if (userId == Guid.Empty) throw new ArgumentException("userId is required", nameof(userId));
         IReadOnlyList<Server> servers = await serverRepository.GetUserServersAsync(userId);
         return servers.Select(ServerMapper.ToDomain).ToList();
     }
@@ -55,7 +55,7 @@ public class ServerChannelEFService(IServerRepository serverRepository, IChannel
     
     public async Task<IReadOnlyList<ChannelEntity>> GetChannelsByServerIdAsync(Guid serverId)
     {
-        if(serverId != Guid.Empty) throw new ArgumentException("serverId is required", nameof(serverId));
+        if(serverId == Guid.Empty) throw new ArgumentException("serverId is required", nameof(serverId));
         IReadOnlyList<Channel> channels = await channelRepository.GetServerChannelsAsync(serverId);
         return channels.Select(ChannelMapper.ToDomain).ToList();
     }

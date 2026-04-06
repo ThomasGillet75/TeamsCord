@@ -12,17 +12,17 @@ namespace API.Controller;
 [Route("api/server")]
 public class ServerController(ServerUseCase serverUseCase) : ControllerBase 
 {
+    [HttpGet("all/servers")]
     [Authorize]
-    [HttpGet("all")]
     public async Task<ActionResult> GetUserServers()
     {
         string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (string.IsNullOrWhiteSpace(userIdClaim)) return Unauthorized();
-        return Ok(serverUseCase.GetServers.Execute(userIdClaim));
+        return Ok(await serverUseCase.GetServers.Execute(userIdClaim));
     }
     
+    [HttpPost("add/server")]
     [Authorize]
-    [HttpPost]
     public async Task<ActionResult> AddServer(PostServerRequest postServerRequest)
     {
         string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -31,15 +31,15 @@ public class ServerController(ServerUseCase serverUseCase) : ControllerBase
         return Ok();
     }
 
+    [HttpGet("all/channels")]
     [Authorize]
-    [HttpGet("{serverId}")]
-    public async Task<ActionResult> GetChannels(Guid serverId)
+    public async Task<ActionResult> GetChannels([FromQuery] GetChannelsRequest request)
     {
-        return Ok(await serverUseCase.GetChannels.Execute(serverId.ToString()));
+        return Ok(await serverUseCase.GetChannels.Execute(request));
     }
 
+    [HttpPost("add/channel")]
     [Authorize]
-    [HttpPost("channel")]
     public async Task<ActionResult>  AddChannel(PostChannelRequest postChannelRequest)
     {
         serverUseCase.AddChannel.Execute(postChannelRequest);

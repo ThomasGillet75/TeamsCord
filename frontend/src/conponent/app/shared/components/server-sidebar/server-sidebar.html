@@ -3,8 +3,8 @@
     @for (server of servers(); track server.id) {
       <tc-server-item
         [name]="server.name"
-        [isSelected]="selectedServerId() === server.id"
-        (onSelect)="onSelectServer.emit(server.id)"
+        [isSelected]="selectedServer()?.id === server.id"
+        (onSelect)="onSelectServer.emit(server)"
       />
     }
   </div>

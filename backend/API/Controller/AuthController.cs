@@ -18,8 +18,8 @@ public class AuthController(AuthUseCase authUseCase) : ControllerBase
         string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (string.IsNullOrWhiteSpace(userIdClaim)) return Unauthorized();
         
-        GetUserResponse getUserResponse = await authUseCase.Get.Execute(userIdClaim);
-        return Ok(getUserResponse);
+        GetUserResponse response = await authUseCase.Get.Execute(userIdClaim);
+        return Ok(response);
     }
     
     [HttpPost("signin")]

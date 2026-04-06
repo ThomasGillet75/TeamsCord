@@ -1,5 +1,6 @@
 import {Component, input, InputSignal} from '@angular/core';
 import {Button} from '../../../../shared/components/button/button';
+import {ChannelModel} from '../../../../core/models/channel.model';
 
 @Component({
   selector: 'app-channel',
@@ -10,7 +11,7 @@ import {Button} from '../../../../shared/components/button/button';
   styleUrl: './channel.css',
 })
 export class Channel {
-  name : InputSignal<string> = input<string>("Channel");
+  channel : InputSignal<ChannelModel> = input<ChannelModel>({id : "-1", name : "Channel"});
   onClickJoin() : void{
     console.log("test");
   }

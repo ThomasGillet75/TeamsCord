@@ -1,16 +1,16 @@
 <div class="call-page">
-  <tc-header>{{ selectedServerName }}</tc-header>
+  <tc-header>{{ selectedServer()?.name ?? "Serveur"}}</tc-header>
   <div class="call-layout">
     <tc-server-sidebar
-      [servers]="servers"
-      [selectedServerId]="selectedServerId"
+      [servers]="servers()"
+      [selectedServer]="selectedServer()"
       (onSelectServer)="onSelectServer($event)"
       (onAddServer)="onAddServer($event)"
     />
 
     <div class="flex-row call-page-content gap">
-      @for (channel of channels; track channel){
-        <app-channel [name]="channel">
+      @for (channel of channels(); track channel){
+        <app-channel [channel]="channel">
           <app-member memberName="Thomas" />
         </app-channel>
       }
