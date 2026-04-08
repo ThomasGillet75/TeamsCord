@@ -18,7 +18,7 @@ public class AuthController(AuthUseCase authUseCase) : ControllerBase
         string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (string.IsNullOrWhiteSpace(userIdClaim)) return Unauthorized();
         
-        GetUserResponse response = await authUseCase.Get.Execute(userIdClaim);
+        GetUserResponse response = await authUseCase.Get.Execute(Guid.Parse(userIdClaim));
         return Ok(response);
     }
     

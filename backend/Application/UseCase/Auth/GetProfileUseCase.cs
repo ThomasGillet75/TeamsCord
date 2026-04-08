@@ -7,9 +7,10 @@ namespace Application.UseCase.Auth;
 
 public class GetProfileUseCase(IUserEFService userEFService)
 {
-    public async Task<GetUserResponse> Execute(string userId)
+    public async Task<GetUserResponse> Execute(Guid userId)
     {
-        UserEntity userEntity = userEFService.GetUserById(Guid.Parse(userId));
+        UserEntity userEntity = userEFService.GetUserById(userId) ??
+                                throw new KeyNotFoundException($"User {userId} does not exist.");
         return new GetUserResponse(userEntity.Username);
     }
 }
