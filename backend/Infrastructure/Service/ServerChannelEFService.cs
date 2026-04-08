@@ -59,6 +59,4 @@ public class ServerChannelEFService(IServerRepository serverRepository, IChannel
         IReadOnlyList<Channel> channels = await channelRepository.GetServerChannelsAsync(serverId);
         return channels.Select(ChannelMapper.ToDomain).ToList();
     }
-    
-    
 }

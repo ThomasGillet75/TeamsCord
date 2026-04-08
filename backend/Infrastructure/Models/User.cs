@@ -24,7 +24,7 @@ public class User
     {
         Id = Guid.NewGuid();
         Username = username;
-        Email = email;
+        Email = email.ToLowerInvariant().Trim();
         Password = password;
     }
 }
