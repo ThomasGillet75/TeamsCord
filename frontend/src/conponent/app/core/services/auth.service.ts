@@ -8,8 +8,10 @@ import {
 } from '../models/auth.model';
 import {Observable} from 'rxjs';
 import {AuthTokenService} from './auth-token.service';
+import {environment} from '../../../../environments/environment.development';
 
-const AUTH_URL: string = 'https://localhost:7295/api/auth';
+const BACKEND_API_URL: string | undefined = environment.apiURL;
+const AUTH_URL: string = `${BACKEND_API_URL}/auth`;
 
 @Injectable({
   providedIn: 'root',

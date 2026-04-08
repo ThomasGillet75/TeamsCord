@@ -4,8 +4,10 @@ import {AuthTokenService} from './auth-token.service';
 import {Observable} from 'rxjs';
 import {AddChannelRequest, GetChannelsRequest, GetChannelsResponse} from '../models/channel.model';
 import {AddServersRequest, GetServersResponse} from '../models/server.model';
+import {environment} from '../../../../environments/environment.development';
 
-const AUTH_URL: string = 'https://localhost:7295/api/server';
+const BACKEND_API_URL: string = environment.apiURL;
+const AUTH_URL: string = `${BACKEND_API_URL}/server`;
 const GET_CHANNELS_URL: string = AUTH_URL + '/all/channels';
 const GET_SERVERS_URL: string = AUTH_URL + '/all/servers';
 const ADD_SERVER_URL: string = AUTH_URL + '/add/server';
