@@ -29,6 +29,8 @@ public static class ServicesExtension
             environmentSettings.Jwt.Issuer,
             environmentSettings.Jwt.Audience);
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IPasswordHasher, PasswordService>();
+        
         services.AddCors(options =>
         {
             options.AddPolicy("AllowAll", policy =>

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
-public class UserEFService (DatabaseContext db) : IUserEFService
+public class UserEFService(DatabaseContext db) : IUserEFService
 {
     public UserEntity GetUserById(Guid userId)
     {
@@ -15,7 +15,7 @@ public class UserEFService (DatabaseContext db) : IUserEFService
         return UserMapper.ToDomain(user);
     }
 
-    public void AddUser(UserEntity user)
+    public async Task AddUserAsync(UserEntity user, CancellationToken cancellationToken)
     {
         try
         {
@@ -45,6 +45,20 @@ public class UserEFService (DatabaseContext db) : IUserEFService
         catch (InvalidOperationException)
         {
             throw new InvalidOperationException("data is not valid");
+        }
+    }
+
+    public async Task<bool> ExistsByEmailAsync(string email, CancellationToken cancellationToken)
+    {
+        try
+        {
+            if(db.Users.SingleOrDefault(u => u.Email == email) != null)
+                return true;
+            return false;
+        }
+        catch (Exception e)
+        {
+            throw new InvalidOperationException("An error occurred while checking for existing email", e);
         }
     }
 }
