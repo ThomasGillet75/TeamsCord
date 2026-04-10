@@ -8,6 +8,7 @@ import {Server} from '../../../../core/models/server.model';
 import {ServerService} from '../../../../core/services/server.service';
 import {firstValueFrom} from 'rxjs';
 import {ChannelModel} from '../../../../core/models/channel.model';
+import {BackgroundShader} from '../../../../core/background-shader/background-shader';
 
 @Component({
   selector: 'app-call',
@@ -16,7 +17,8 @@ import {ChannelModel} from '../../../../core/models/channel.model';
     ChannelAddContainer,
     Header,
     ServerSidebar,
-    Channel
+    Channel,
+    BackgroundShader
   ],
   templateUrl: './call-page.component.html',
   styleUrl: './call-page.component.css',

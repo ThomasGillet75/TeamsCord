@@ -1,20 +1,23 @@
 <div class="call-page">
-  <tc-header>{{ selectedServer()?.name ?? "Serveur"}}</tc-header>
-  <div class="call-layout">
-    <tc-server-sidebar
-      [servers]="servers()"
-      [selectedServer]="selectedServer()"
-      (onSelectServer)="onSelectServer($event)"
-      (onAddServer)="onAddServer($event)"
-    />
+    <tc-background-shader/>
+  <div class="call-page-content-layer">
+    <tc-header>{{ selectedServer()?.name ?? "Serveur" }}</tc-header>
+    <div class="call-layout">
+      <tc-server-sidebar
+        [servers]="servers()"
+        [selectedServer]="selectedServer()"
+        (onSelectServer)="onSelectServer($event)"
+        (onAddServer)="onAddServer($event)"
+      />
 
-    <div class="flex-row call-page-content gap">
-      @for (channel of channels(); track channel){
-        <app-channel [channel]="channel">
-          <app-member memberName="Thomas" />
-        </app-channel>
-      }
-      <tc-channel-add-container (onValidate)="onAddChannel($event)"/>
+      <div class="flex-row call-page-content gap">
+        @for (channel of channels(); track channel) {
+          <app-channel [channel]="channel">
+            <app-member memberName="Thomas"/>
+          </app-channel>
+        }
+        <tc-channel-add-container (onValidate)="onAddChannel($event)"/>
+      </div>
     </div>
   </div>
 </div>
