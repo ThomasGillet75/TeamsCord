@@ -3,7 +3,7 @@ using BCrypt.Net;
 
 namespace Infrastructure;
 
-public class PasswordService : IPasswordHasher
+public class PasswordService : IPasswordService
 {
     
     public const int MinPasswordLength = 8;

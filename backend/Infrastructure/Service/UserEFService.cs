@@ -15,7 +15,7 @@ public class UserEFService(DatabaseContext db) : IUserEFService
         return UserMapper.ToDomain(user);
     }
 
-    public async Task AddUserAsync(UserEntity user, CancellationToken cancellationToken)
+    public async Task AddUserAsync(UserEntity user)
     {
         try
         {
@@ -48,7 +48,7 @@ public class UserEFService(DatabaseContext db) : IUserEFService
         }
     }
 
-    public async Task<bool> ExistsByEmailAsync(string email, CancellationToken cancellationToken)
+    public async Task<bool> ExistsByEmailAsync(string email)
     {
         try
         {

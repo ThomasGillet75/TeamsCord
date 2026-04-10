@@ -29,7 +29,7 @@ public static class ServicesExtension
             environmentSettings.Jwt.Issuer,
             environmentSettings.Jwt.Audience);
         services.AddScoped<ITokenService, TokenService>();
-        services.AddScoped<IPasswordHasher, PasswordService>();
+        services.AddScoped<IPasswordService, PasswordService>();
         
         services.AddCors(options =>
         {

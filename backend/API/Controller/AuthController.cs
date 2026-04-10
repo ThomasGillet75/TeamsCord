@@ -13,17 +13,17 @@ public class AuthController(AuthUseCase authUseCase) : ControllerBase
 {
     [HttpGet]
     [Authorize]
-    public async Task<ActionResult> GetProfile()
+    public ActionResult GetProfile()
     {
         string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (string.IsNullOrWhiteSpace(userIdClaim)) return Unauthorized();
         
-        GetUserResponse response = await authUseCase.Get.Execute(Guid.Parse(userIdClaim));
+        GetUserResponse response = authUseCase.Get.Execute(Guid.Parse(userIdClaim));
         return Ok(response);
     }
     
     [HttpPost("signin")]
-    public async Task<ActionResult> SignIn([FromBody] SignInRequest signInRequest)
+    public ActionResult SignIn([FromBody] SignInRequest signInRequest)
     {
         SignInResponse signInResponse = authUseCase.SignIn.Execute(signInRequest);
         return Ok(signInResponse);
@@ -36,6 +36,4 @@ public class AuthController(AuthUseCase authUseCase) : ControllerBase
         if (created) return Ok();
         return Conflict(new { message = error });
     }
-    
-    
 }

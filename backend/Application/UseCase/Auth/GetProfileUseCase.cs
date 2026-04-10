@@ -5,11 +5,11 @@ using Infrastructure;
 
 namespace Application.UseCase.Auth;
 
-public class GetProfileUseCase(IUserEFService userEFService)
+public class GetProfileUseCase(IUserEFService userEfService)
 {
-    public async Task<GetUserResponse> Execute(Guid userId)
+    public GetUserResponse Execute(Guid userId)
     {
-        UserEntity userEntity = userEFService.GetUserById(userId) ??
+        UserEntity userEntity = userEfService.GetUserById(userId) ??
                                 throw new KeyNotFoundException($"User {userId} does not exist.");
         return new GetUserResponse(userEntity.Username);
     }
