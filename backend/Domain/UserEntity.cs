@@ -7,17 +7,14 @@ public class UserEntity
     public string Email { get; set; }
     public string Password { get; set; }
 
-    public UserEntity(Guid id, string username, string email, string password)
+    public UserEntity(Guid id, string username, string email, string password): this(username, email, password)
     {
         Id = id;
-        Username = username;
-        Email = email;
-        Password = password;
     }    
     public UserEntity(string username, string email, string password)
     {
-        Username = username;
-        Email = email;
+        Username = username.Trim();
+        Email = email.Trim().ToLowerInvariant();
         Password = password;
     }
 }

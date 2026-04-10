@@ -15,7 +15,7 @@ public record SignUpRequest
     
     [Required]
     [MinLength(8)]
-    [MaxLength(50)]
+    [MaxLength(128)]
     public string Password { get; init; } = string.Empty;
 
 };

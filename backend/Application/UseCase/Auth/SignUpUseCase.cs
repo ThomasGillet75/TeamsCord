@@ -14,16 +14,10 @@ public class SignUpUseCase(IUserEFService userEfService, IPasswordService passwo
         (bool IsSuccess, string? Error) validationResult = await ValidateRequestAsync(request);
         if (!validationResult.IsSuccess)
             return (false, validationResult.Error);
-
+        
         string hashedPassword = passwordService.Hash(request.Password);
-
-        UserEntity user = new UserEntity(
-            request.Username.Trim(),
-            request.Email.Trim().ToLowerInvariant(),
-            hashedPassword);
-
-        await userEfService.AddUserAsync(user);
-
+        UserEntity newUser = new UserEntity(request.Username, request.Email, hashedPassword);
+        await userEfService.AddUserAsync(newUser);
         return (true, null);
     }
 
