@@ -28,6 +28,19 @@ export class CallPage implements OnInit {
   readonly selectedServer: WritableSignal<Server | null> = signal<Server | null>(null);
   readonly channels: WritableSignal<ReadonlyArray<ChannelModel>> = signal<ReadonlyArray<ChannelModel>>([]);
 
+  ngOnInit(): void {
+    this.initData().then(() => {
+      console.log('Data initialized successfully');
+    }).catch((error) => {
+      console.error('Data initialization failed:', error);
+    });
+  }
+
+  private async initData(): Promise<void> {
+    await this.loadServers();
+    await this.loadChannels();
+  }
+
   async loadServers(): Promise<void> {
     if (this.selectedServer() != null) {
       this.servers.set([]);
@@ -88,16 +101,5 @@ export class CallPage implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.initData().then(() => {
-      console.log('Data initialized successfully');
-    }).catch((error) => {
-      console.error('Data initialization failed:', error);
-    });
-  }
 
-  private async initData(): Promise<void> {
-    await this.loadServers();
-    await this.loadChannels();
-  }
 }

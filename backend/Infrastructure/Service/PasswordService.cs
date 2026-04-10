@@ -28,6 +28,6 @@ public class PasswordService : IPasswordService
         if (string.IsNullOrWhiteSpace(passwordHash))
             throw new ArgumentException("Password hash is required.", nameof(passwordHash));
 
-        return BCrypt.Net.BCrypt.Verify(password, passwordHash, hashType: HashType.SHA384);
+        return BCrypt.Net.BCrypt.EnhancedVerify(password, passwordHash, hashType: HashType.SHA384);
     }
 }

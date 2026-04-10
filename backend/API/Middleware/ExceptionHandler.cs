@@ -18,7 +18,6 @@ public class ExceptionHandler : IExceptionHandler
         CancellationToken cancellationToken)
     {
         
-        Console.WriteLine(exception);
         _logger.LogError(
             exception,
             "Unhandled exception at {Time}",

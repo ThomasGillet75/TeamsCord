@@ -6,6 +6,7 @@ public static class WebApplicationExtension
     {
         app.UseForwardedHeaders();
         app.UseCors("AllowAll");
+        app.UseExceptionHandler();
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();

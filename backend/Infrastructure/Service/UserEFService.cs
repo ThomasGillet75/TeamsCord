@@ -28,18 +28,15 @@ public class UserEFService(DatabaseContext db) : IUserEFService
         }
     }
 
-    public UserEntity VerifyUser(string email, string password)
+    public UserEntity VerifyUser(string email)
     {
         try
         {
             if (string.IsNullOrWhiteSpace(email))
-                throw new ArgumentException("email is required", nameof(email));
-
-            if (string.IsNullOrWhiteSpace(password))
-                throw new ArgumentException("password is required", nameof(password));
-
-            User? user = db.Users.SingleOrDefault(u => u.Email == email && u.Password == password);
-            if (user == null) throw new Exception("User not found");
+                throw new ArgumentException("email is required");
+            
+            User? user = db.Users.SingleOrDefault(u => u.Email == email);
+            if (user == null) throw new Exception("Email invalid or User does not exist");
             return UserMapper.ToDomain(user);
         }
         catch (InvalidOperationException)
