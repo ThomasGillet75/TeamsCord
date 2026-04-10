@@ -100,6 +100,4 @@ export class CallPage implements OnInit {
       console.error('Failed to add server:', error);
     }
   }
-
-
 }
