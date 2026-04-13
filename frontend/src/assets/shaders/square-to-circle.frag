@@ -1,41 +1,78 @@
-#extension GL_OES_standard_derivatives : enable
 precision mediump float;
 
-uniform vec2 u_resolution;
-uniform vec2 u_mouse;
+  uniform vec2 u_resolution;
+  uniform vec2 u_mouse;
 
-void main() {
+  const vec3 COLOR_BACKGROUND = vec3(72.0 / 255.0, 88.0 / 255.0, 154.0 / 255.0);
+  const vec3 COLOR_SHAPE = vec3(48.0 / 255.0, 52.0 / 255.0, 70.0 / 255.0);
 
-  vec2 uv = gl_FragCoord.xy / u_resolution;
+  vec2 toAspectCorrectedSpace(vec2 normalizedCoord, float aspectRatio) {
+    return vec2((normalizedCoord.x - 0.5) * aspectRatio + 0.5, normalizedCoord.y);
+  }
 
-  float aspect = u_resolution.x / u_resolution.y;
-  vec2 uvA = vec2((uv.x - 0.5) * aspect + 0.5, uv.y);
-  vec2 mouseA = vec2((u_mouse.x - 0.5) * aspect + 0.5, u_mouse.y);
+  float computeGridCellCount(float smallestScreenDimensionPx) {
+    return clamp(floor(smallestScreenDimensionPx / 72.0), 8.0, 22.0);
+  }
 
-  float grid = 15.0;
-  vec2 gv = fract(uvA * grid);
-  vec2 id = floor(uvA * grid);
+  float computeGapRatioInCell(float cellSizePx) {
+    float gapSizePx = clamp(cellSizePx * 0.22, 6.0, 18.0);
+    return clamp(gapSizePx / cellSizePx, 0.08, 0.45);
+  }
 
-  float gapPx = 20.0;
-  float gap = clamp((gapPx * grid) / min(u_resolution.x, u_resolution.y), 0.0, 0.9);
-  gv = gv * (1.0 - gap) + gap * 0.5;
+  float signedDistanceRoundedBox(vec2 centeredLocalCoord, vec2 halfExtents, float cornerRadius) {
+    vec2 distanceToEdges = abs(centeredLocalCoord) - (halfExtents - vec2(cornerRadius));
+    return length(max(distanceToEdges, 0.0)) + min(max(distanceToEdges.x, distanceToEdges.y), 0.0) - cornerRadius;
+  }
 
-  vec2 center = (id + 0.5) / grid;
-  float d = distance(center, mouseA);
-  float influence = smoothstep(0.20, 0.0, d);
+  float computeMouseInfluence(vec2 gridCellIndex, float gridCellCount, vec2 aspectCorrectedMouseCoord) {
+    vec2 gridCellCenter = (gridCellIndex + 0.5) / gridCellCount;
+    float distanceToMouse = distance(gridCellCenter, aspectCorrectedMouseCoord);
+    return smoothstep(0.20, 0.0, distanceToMouse);
+  }
 
-  float radius = 0.07;
-  vec2 q = abs(gv - 0.5) - vec2(0.34 - radius);
-  float roundedSquare = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
-  float circle = length(gv - 0.5) - 0.34;
-  float shape = mix(roundedSquare, circle, influence);
+  float computeShapeSignedDistance(vec2 localCellCoord, float shapeHalfSize, float morphInfluence) {
+    vec2 centeredLocalCoord = localCellCoord - 0.5;
+    float roundedCornerRadius = shapeHalfSize * 0.24;
 
-  float aa = max(fwidth(shape), 0.001);
-  float mask = 1.0 - smoothstep(0.0, aa, shape);
+    float roundedSquareDistance = signedDistanceRoundedBox(
+      centeredLocalCoord,
+      vec2(shapeHalfSize),
+      roundedCornerRadius
+    );
+    float circleDistance = length(centeredLocalCoord) - shapeHalfSize;
 
-  vec3 bg = vec3(72.0/255.0, 88.0/255.0, 154.0/255.0); //blue => #48589a
-  vec3 fg = vec3(48.0/255.0, 52.0/255.0, 70.0/255.0); //Background Color
-  vec3 color = mix(bg, fg, mask);
+    return mix(roundedSquareDistance, circleDistance, morphInfluence);
+  }
 
-  gl_FragColor = vec4(color, 1.0);
-}
+  void main() {
+    vec2 normalizedFragmentCoord = gl_FragCoord.xy / u_resolution;
+    float viewportAspectRatio = u_resolution.x / u_resolution.y;
+
+    vec2 aspectCorrectedFragmentCoord = toAspectCorrectedSpace(normalizedFragmentCoord, viewportAspectRatio);
+    vec2 aspectCorrectedMouseCoord = toAspectCorrectedSpace(u_mouse, viewportAspectRatio);
+
+    float smallestScreenDimensionPx = min(u_resolution.x, u_resolution.y);
+    float gridCellCount = computeGridCellCount(smallestScreenDimensionPx);
+
+    vec2 gridSpaceCoord = aspectCorrectedFragmentCoord * gridCellCount;
+    vec2 localCellCoord = fract(gridSpaceCoord);
+    vec2 gridCellIndex = floor(gridSpaceCoord);
+
+    float cellSizePx = smallestScreenDimensionPx / gridCellCount;
+    float gapRatioInCell = computeGapRatioInCell(cellSizePx);
+
+    localCellCoord = localCellCoord * (1.0 - gapRatioInCell) + gapRatioInCell * 0.5;
+
+    float morphInfluence = computeMouseInfluence(gridCellIndex, gridCellCount, aspectCorrectedMouseCoord);
+
+    float shapeHalfSize = 0.5 - gapRatioInCell * 0.5 - 0.02;
+    shapeHalfSize = clamp(shapeHalfSize, 0.10, 0.45);
+
+    float shapeSignedDistance = computeShapeSignedDistance(localCellCoord, shapeHalfSize, morphInfluence);
+
+    float antiAliasWidth = max(1.5 / cellSizePx, 0.001);
+    float shapeMask = 1.0 - smoothstep(0.0, antiAliasWidth, shapeSignedDistance);
+
+    vec3 finalColor = mix(COLOR_BACKGROUND, COLOR_SHAPE, shapeMask);
+    gl_FragColor = vec4(finalColor, 1.0);
+  }
