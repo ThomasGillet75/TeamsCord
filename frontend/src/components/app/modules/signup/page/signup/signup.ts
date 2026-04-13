@@ -6,13 +6,15 @@ import {EPage} from '../../../../shared/enum/EPage';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../../core/services/auth.service';
 import {SignUpRequest, SignUpResponse} from '../../../../core/models/auth.model';
+import {BackgroundShader} from '../../../../core/background-shader/background-shader';
 
 @Component({
   selector: 'tc-signup',
   imports: [
     Banner,
     Button,
-    Input
+    Input,
+    BackgroundShader
   ],
   templateUrl: './signup.html',
   styleUrl: './signup.css',

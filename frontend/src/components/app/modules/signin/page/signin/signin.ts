@@ -7,13 +7,15 @@ import {EPage} from '../../../../shared/enum/EPage';
 import {AuthService} from '../../../../core/services/auth.service';
 import {SignInRequest} from '../../../../core/models/auth.model';
 import {AuthTokenService} from '../../../../core/services/auth-token.service';
+import {BackgroundShader} from '../../../../core/background-shader/background-shader';
 
 @Component({
   selector: 'tc-signin',
   imports: [
     Button,
     Banner,
-    Input
+    Input,
+    BackgroundShader
   ],
   templateUrl: './signin.html',
   styleUrl: './signin.css',
