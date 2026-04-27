@@ -12,10 +12,11 @@ export class BackgroundShader {
   private canvasRef!: ElementRef<HTMLCanvasElement>;
   private uResolution: WebGLUniformLocation | null = null;
   private uMouse: WebGLUniformLocation | null = null;
+  private webglProgramFactory = inject(WebglProgramFactory);
+
   private mouse = { x: 0.5, y: 0.5 };
   private vertexPath:string = "/assets/shaders/square-to-circle.vert"
   private fragmentPath:string = "/assets/shaders/square-to-circle.frag"
-  private webglProgramFactory = inject(WebglProgramFactory);
 
   async ngAfterViewInit(): Promise<void> {
     await this.shaderInit();

@@ -5,15 +5,12 @@ namespace Infrastructure;
 
 public class DatabaseContext : DbContext
 {
-    public DbSet<User> Users { get; set; }
-    public DbSet<Server> Servers { get; set; }
-    public DbSet<Channel> Channels { get; set; }
-    public DbSet<Member> Members { get; set; }
+    public DbSet<User> Users => Set<User>();
+    public DbSet<Server> Servers => Set<Server>();
+    public DbSet<Channel> Channels => Set<Channel>();
+    public DbSet<Member> Members => Set<Member>();
 
-    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
-    {
-    }
-
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
