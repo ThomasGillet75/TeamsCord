@@ -1,7 +1,7 @@
 <div class="call-page">
     <tc-background-shader/>
   <div class="call-page-content-layer">
-    <tc-header>{{ selectedServer()?.name ?? "Serveur" }}</tc-header>
+    <tc-header [serverName] = selectedServer()?.name ></tc-header>
     <div class="call-layout">
       <tc-server-sidebar
         [servers]="servers()"
@@ -9,7 +9,6 @@
         (onSelectServer)="onSelectServer($event)"
         (onAddServer)="onAddServer($event)"
       />
-
       <div class="flex-row call-page-content gap">
         @for (channel of channels(); track channel) {
           <app-channel [channel]="channel">

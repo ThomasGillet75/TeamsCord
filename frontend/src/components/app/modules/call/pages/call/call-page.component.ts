@@ -9,6 +9,7 @@ import {ServerService} from '../../../../core/services/server.service';
 import {firstValueFrom} from 'rxjs';
 import {ChannelModel} from '../../../../core/models/channel.model';
 import {BackgroundShader} from '../../../../core/background-shader/background-shader';
+import {Button} from '../../../../shared/components/button/button';
 
 @Component({
   selector: 'app-call',
@@ -18,7 +19,7 @@ import {BackgroundShader} from '../../../../core/background-shader/background-sh
     Header,
     ServerSidebar,
     Channel,
-    BackgroundShader
+    BackgroundShader,
   ],
   templateUrl: './call-page.component.html',
   styleUrl: './call-page.component.css',

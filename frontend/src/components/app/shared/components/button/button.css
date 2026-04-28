@@ -16,6 +16,25 @@
   color: #27292FFF
 }
 
+.square {
+  border: none;
+  background: none;
+  border-radius: 0;
+  padding: 8px 8px;
+  cursor: pointer;
+  background: rgb(39, 41, 47);
+  color: #a6a8ae;
+  font-size: 18px;
+  width: 48px;
+  height: 48px;
+  font-family: var(--font-engine);
+}
+
+.square:hover {
+  background: rgb(164, 168, 176);
+  color: #27292FFF
+}
+
 .secondary{
   border: none;
   background: none;

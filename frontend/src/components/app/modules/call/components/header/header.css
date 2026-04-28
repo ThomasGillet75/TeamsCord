@@ -4,13 +4,6 @@
   display: flex;
   flex-direction: row;
   border-radius: 0 0 12px 12px ;
-  padding: 0 24px;
-}
-.header-content{
-  font-size: 100px;
-  color: var(--main-color);
-  font-family: var(--font-engine);
-  white-space: nowrap;
-
+  padding: 8px 24px;
 }
 

@@ -1,6 +1,6 @@
 import {Component, InputSignal, input, output} from '@angular/core';
 
-type ButtonVariant = 'primary' | 'secondary';
+type ButtonVariant = 'primary' | 'secondary' | 'square';
 
 @Component({
   selector: 'tc-button',
