@@ -1,4 +1,5 @@
 <form class="channel-config gap" (submit)="onClick(); $event.preventDefault()">
+  <button class="close-button" onClick="onClose()">x</button>
   <tc-input variant="secondary" title="Channel Name" [(value)]="channelName"/>
   <tc-button>Create Channel</tc-button>
 </form>

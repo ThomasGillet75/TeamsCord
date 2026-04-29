@@ -8,6 +8,11 @@
   background-color: var(--main-color);
 }
 
+.channel-add-container{
+  width: 250px;
+  height: 250px;
+}
+
 .channel-add:hover{
   background-color: var(--main-color);
   cursor: pointer;

@@ -1,9 +1,9 @@
 <div class="dropdown-wrapper">
-  <button class="flex-row-center-center button-dropdown">
+  <button class="flex-row-center-center button-dropdown" (click)="toggleDropdown()">
     {{ name() }}
-    <tc-arrow-icon color="#303446" [direction]="EDirection.Down" size="48"/>
+    <tc-arrow-icon color="#303446" [direction]="direction" size="48"/>
   </button>
-  <div class="flex-column dropdown-menu gap">
+  <div class="flex-column dropdown-menu gap" [class.active]="dropdownIsOpen">
     <tc-button variant="secondary">Config</tc-button>
     <tc-button variant="secondary">Modify</tc-button>
     <tc-button variant="secondary">Modify</tc-button>

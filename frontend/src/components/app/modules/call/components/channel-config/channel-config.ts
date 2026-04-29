@@ -18,5 +18,8 @@ export class ChannelConfig {
     this.onValidate.emit(this.channelName);
     this.onChange.emit();
   }
+  onClose() : void {
+    this.onChange.emit();
+  }
   onChange = output<void>();
 }

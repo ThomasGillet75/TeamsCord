@@ -1,6 +1,8 @@
-<button class="channel-add flex-row-center"
-        (click)="addChannel()"
-        (mouseenter)="hoverState = true"
-        (mouseleave)="hoverState = false">
+<div class="channel-add-container flex-row-center">
+  <button class="channel-add flex-row-center"
+          (click)="addChannel()"
+          (mouseenter)="hoverState = true"
+          (mouseleave)="hoverState = false">
     <tc-add-icon [isHovered]="hoverState"></tc-add-icon>
-</button>
+  </button>
+</div>

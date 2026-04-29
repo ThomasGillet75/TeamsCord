@@ -18,20 +18,24 @@
   position: relative;
   display: inline-block;
 }
-
 .dropdown-menu {
+  display: none;
+}
+
+.dropdown-menu.active {
+  display: flex;
   position: absolute;
   background-color: var(--main-color);
   border-radius: 12px;
-  width: 128px;
+  width: 192px;
   padding: 8px;
   z-index: 10;
-  right: 0;
+  right: 8px;
   box-shadow: #292c3c 5px 5px 10px;
 }
 
 .dropdown-item {
-  padding: 8px;
+  padding: 16px;
   border-radius: 12px;
   border: 1px solid var(--main-color);
   width: 100%;
