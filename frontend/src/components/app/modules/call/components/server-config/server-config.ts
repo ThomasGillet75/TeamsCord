@@ -2,11 +2,13 @@ import {Component, output} from '@angular/core';
 import {Button} from "../../../../shared/components/button/button";
 import {IModal, Modal} from '../modal/modal';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Input} from "../../../../shared/components/input/input";
 
 @Component({
   selector: 'tc-server-config',
   imports: [
-    Modal
+    Modal,
+    Input
   ],
   templateUrl: './server-config.html',
   styleUrl: './server-config.css',
@@ -30,6 +32,7 @@ export class ServerConfig implements IModal {
   handleSubmit(form: FormGroup): void {
     if (form.valid) {
       this.onValidate.emit(form.get('serverName')?.value);
+      this.onShow.emit();
     }
   }
 }

@@ -3,13 +3,15 @@ import {Button} from '../button/button';
 import {Server} from '../../../core/models/server.model';
 import {ServerItem} from '../server-item/server-item';
 import {AddIcon} from '../icons/add-icon/add-icon';
+import {ServerConfig} from '../../../modules/call/components/server-config/server-config';
 
 @Component({
   selector: 'tc-server-sidebar',
   imports: [
     Button,
     ServerItem,
-    AddIcon
+    AddIcon,
+    ServerConfig,
   ],
   templateUrl: './server-sidebar.html',
   styleUrl: './server-sidebar.css',
@@ -21,6 +23,7 @@ export class ServerSidebar {
   onAddServer = output<string>();
 
   newServerName: string = '';
+  show: boolean = false;
 
   onServerNameInput(event: Event): void {
     const target = event.target as HTMLInputElement;
@@ -34,6 +37,10 @@ export class ServerSidebar {
     }
     this.onAddServer.emit(serverName);
     this.newServerName = '';
+  }
+
+  onShowModal(): void {
+    this.show = !this.show;
   }
 }
 

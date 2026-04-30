@@ -20,3 +20,7 @@
     <tc-add-icon/>
   </div>
 </aside>
+
+@if(show){
+  <tc-server-config (onShow)="onShowModal()" (onValidate)="onAddServer.emit($event)"/>
+}

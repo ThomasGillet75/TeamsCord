@@ -1,5 +1,7 @@
-<tc-modal [form]="serverForm"
-          submitButtonText="Create Server"
-          (onSubmit)="handleSubmit($event)"
-          (onClose)="handleClose()">
+<tc-modal
+  [form]="serverForm"
+  submitButtonText="Create Server"
+  (onSubmit)="handleSubmit($event)"
+  (onClose)="handleClose()">
+  <tc-input variant="secondary" title="Server Name" formControlName="serverName"/>
 </tc-modal>
