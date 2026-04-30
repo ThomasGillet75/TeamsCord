@@ -1,0 +1,5 @@
+<form class="modal gap" (submit)="handleSubmit(); $event.preventDefault()">
+  <button class="close-button" onClick="onClose()">x</button>
+  <ng-content/>
+  <tc-button>{{submitButtonText}}</tc-button>
+</form>

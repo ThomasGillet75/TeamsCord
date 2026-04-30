@@ -17,24 +17,6 @@
 }
 
 .channel-config {
-  width: 250px;
-  height: 250px;
-  background: var(--secondary-color);
-  border-radius: 12px;
-  padding: 24px 16px 16px 16px;
   display: flex;
   flex-direction: column;
-  animation: configEnter 600ms ease-in-out;
-  transform-origin: center center;
-}
-
-@keyframes configEnter {
-  from {
-    transform: scale(0);
-    border-radius: 50%;
-  }
-  to {
-    transform: scale(1);
-    border-radius: 12px;
-  }
 }

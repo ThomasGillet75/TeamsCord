@@ -2,12 +2,14 @@ import {Component, input, InputSignal, output} from '@angular/core';
 import {Button} from '../button/button';
 import {Server} from '../../../core/models/server.model';
 import {ServerItem} from '../server-item/server-item';
+import {AddIcon} from '../icons/add-icon/add-icon';
 
 @Component({
   selector: 'tc-server-sidebar',
   imports: [
     Button,
-    ServerItem
+    ServerItem,
+    AddIcon
   ],
   templateUrl: './server-sidebar.html',
   styleUrl: './server-sidebar.css',
