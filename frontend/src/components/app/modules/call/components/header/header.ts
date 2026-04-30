@@ -5,7 +5,6 @@ import {NgComponentOutlet} from '@angular/common';
 @Component({
   selector: 'tc-header',
   imports: [
-    DropdownMenuContainer,
   ],
   templateUrl: './header.html',
   styleUrl: './header.css',

@@ -20,12 +20,3 @@
     <tc-add-icon/>
   </div>
 </aside>
-
-<tc-modal>
-  <form class="server-config gap" (submit)="onClick(); $event.preventDefault()">
-    <button class="close-button" onClick="onClose()">x</button>
-    <tc-input variant="secondary" title="Server Name" [(value)]="serverName"/>
-    <tc-button>Save Changes</tc-button>
-  </form>
-</tc-modal>
-

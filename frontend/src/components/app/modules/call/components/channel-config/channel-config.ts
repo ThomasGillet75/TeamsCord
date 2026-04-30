@@ -1,7 +1,7 @@
 import {Component, output} from '@angular/core';
 import {Input} from '../../../../shared/components/input/input';
 import {Button} from '../../../../shared/components/button/button';
-import {Modal} from '../modal/modal';
+import {IModal, Modal} from '../modal/modal';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -13,7 +13,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   templateUrl: './channel-config.html',
   styleUrl: './channel-config.css',
 })
-export class ChannelConfig {
+export class ChannelConfig implements IModal {
   channelForm: FormGroup;
   channelName: string = "";
   onValidate = output<string>();

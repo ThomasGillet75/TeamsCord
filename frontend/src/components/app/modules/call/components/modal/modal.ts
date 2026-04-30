@@ -2,6 +2,11 @@ import {Component, input, InputSignal, output} from '@angular/core';
 import {Button} from "../../../../shared/components/button/button";
 import {FormGroup} from '@angular/forms';
 
+export interface IModal{
+  handleClose(): void;
+  handleSubmit(form: FormGroup): void;
+}
+
 @Component({
   selector: 'tc-modal',
     imports: [
@@ -10,6 +15,7 @@ import {FormGroup} from '@angular/forms';
   templateUrl: './modal.html',
   styleUrl: './modal.css',
 })
+
 export class Modal {
   form = input<FormGroup | null>(null);
   submitButtonText:InputSignal<string> = input<string>('Valider');
