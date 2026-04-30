@@ -1,7 +1,10 @@
 <div class="call-page">
     <tc-background-shader/>
   <div class="call-page-content-layer">
-    <tc-header [serverName] = selectedServer()?.name ></tc-header>
+    <tc-header>
+      <tc-dropdown-menu-container slot="left" [name]="selectedServer()?.name"/>
+      <div slot="right">{{currentUser()?.username}}</div>
+    </tc-header>
     <div class="call-layout">
       <tc-server-sidebar
         [servers]="servers()"
@@ -12,7 +15,7 @@
       <div class="flex-row call-page-content gap">
         @for (channel of channels(); track channel) {
           <app-channel [channel]="channel">
-            <app-member memberName="Thomas"/>
+            <tc-member memberName="Thomas"/>
           </app-channel>
         }
         <tc-channel-add-container (onValidate)="onAddChannel($event)"/>

@@ -10,6 +10,9 @@ import {firstValueFrom} from 'rxjs';
 import {ChannelModel} from '../../../../core/models/channel.model';
 import {BackgroundShader} from '../../../../core/background-shader/background-shader';
 import {Button} from '../../../../shared/components/button/button';
+import {DropdownMenuContainer} from '../../components/dropdown-menu-container/dropdown-menu-container';
+import {User} from '../../../../core/models/auth.model';
+import {AuthService} from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-call',
@@ -20,15 +23,18 @@ import {Button} from '../../../../shared/components/button/button';
     ServerSidebar,
     Channel,
     BackgroundShader,
+    DropdownMenuContainer,
   ],
   templateUrl: './call-page.component.html',
   styleUrl: './call-page.component.css',
 })
 export class CallPage implements OnInit {
   private readonly serverService: ServerService = inject(ServerService);
+  private readonly authService: AuthService = inject(AuthService);
 
   readonly servers: WritableSignal<ReadonlyArray<Server>> = signal<ReadonlyArray<Server>>([]);
   readonly selectedServer: WritableSignal<Server | null> = signal<Server | null>(null);
+  readonly currentUser: WritableSignal<User | null> = signal<User | null>(null)
   readonly channels: WritableSignal<ReadonlyArray<ChannelModel>> = signal<ReadonlyArray<ChannelModel>>([]);
 
   ngOnInit(): void {
@@ -42,6 +48,13 @@ export class CallPage implements OnInit {
   private async initData(): Promise<void> {
     await this.loadServers();
     await this.loadChannels();
+    await this.loadUser();
+  }
+
+  async loadUser(): Promise<void> {
+    this.authService.getUser().subscribe((user:User) => {
+      this.currentUser.set(user);
+    })
   }
 
   async loadServers(): Promise<void> {
@@ -62,9 +75,7 @@ export class CallPage implements OnInit {
       return;
     }
 
-    const response = await firstValueFrom(
-      this.serverService.getChannels({serverId: server.id})
-    );
+    const response = await firstValueFrom(this.serverService.getChannels({serverId: server.id}));
     this.channels.set(response.channels);
   }
 

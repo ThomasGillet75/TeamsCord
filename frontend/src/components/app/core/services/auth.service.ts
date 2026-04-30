@@ -4,9 +4,9 @@ import {
   SignUpRequest,
   SignInRequest,
   SignInResponse,
-  GetUserResponse
+  GetUserResponse, User
 } from '../models/auth.model';
-import {Observable} from 'rxjs';
+import {map, Observable} from 'rxjs';
 import {AuthTokenService} from './auth-token.service';
 import {environment} from '../../../../environments/environment.development';
 
@@ -28,11 +28,14 @@ export class AuthService {
     return this.http.post<SignInResponse>(AUTH_URL+"/signin", payload);
   }
 
-  getUser(): Observable<GetUserResponse>{
+  getUser(): Observable<User> {
     const token: string = this.authTokenService.getToken();
     const headers: HttpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.get<GetUserResponse>(AUTH_URL, { headers });
+
+    return this.http.get<GetUserResponse>(AUTH_URL, { headers }).pipe(
+      map((response: GetUserResponse) => new User(response.username))
+    );
   }
 }

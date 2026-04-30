@@ -24,3 +24,11 @@ export interface GetUserResponse {
   username: string;
 }
 
+export class User{
+  public username: string | undefined;
+
+  constructor(username:string) {
+    this.username = username;
+  }
+}
+

@@ -1,11 +1,11 @@
 import {Component, input, InputSignal} from '@angular/core';
 
 @Component({
-  selector: 'app-member',
+  selector: 'tc-member',
   imports: [],
   templateUrl: './member.html',
   styleUrl: './member.css',
 })
 export class Member {
-  memberName: InputSignal<string>=  input("");
+  memberName: InputSignal<string|undefined> =  input<string|undefined>("");
 }

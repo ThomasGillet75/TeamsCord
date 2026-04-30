@@ -1,5 +1,13 @@
 <div class="header">
-  <div class="header-content">
-    <tc-dropdown-menu-container [name]="serverName()"></tc-dropdown-menu-container>
-    <ng-content/>
+  <div class="header-grid">
+    <div class="header-left">
+      <ng-content select="[slot=left]"/>
+    </div>
+    <div class="header-center">
+      <ng-content select="[slot=center]"/>
+    </div>
+    <div class="header-right">
+      <ng-content select="[slot=right]"/>
+    </div>
+  </div>
 </div>

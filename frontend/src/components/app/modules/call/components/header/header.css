@@ -7,3 +7,18 @@
   padding: 8px 24px;
 }
 
+.header-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+}
+
+.header-left{
+  grid-column: 1;
+}
+.header-center{
+  grid-column: 2;
+}
+.header-right{
+  grid-column: 3;
+}
