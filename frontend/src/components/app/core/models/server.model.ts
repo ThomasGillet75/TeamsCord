@@ -13,3 +13,7 @@ export interface AddServersRequest{
   name: string;
 }
 
+export interface DeleteServerRequest{
+  serverId: string;
+}
+

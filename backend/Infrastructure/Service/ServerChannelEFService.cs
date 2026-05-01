@@ -59,4 +59,18 @@ public class ServerChannelEFService(IServerRepository serverRepository, IChannel
         IReadOnlyList<Channel> channels = await channelRepository.GetServerChannelsAsync(serverId);
         return channels.Select(ChannelMapper.ToDomain).ToList();
     }
+
+    public void DeleteServerAsync(Guid serverId)
+    {
+        if (serverId == Guid.Empty) throw new ArgumentException("serverId is required", nameof(serverId));
+        try
+        {
+            memberRepository.DeleteMemberByServerId(serverId);
+            serverRepository.DeleteServer(serverId);
+        }
+        catch (DbUpdateException)
+        {
+            throw new InvalidOperationException("error occurred while deleting the server from the database");
+        }
+    }
 }

@@ -23,4 +23,13 @@ public class ServerRepository(DatabaseContext db) : IServerRepository
         await db.Servers.AddAsync(server, cancellationToken);
         await db.SaveChangesAsync(cancellationToken);
     }
+    
+    public async void DeleteServer(Guid serverId, CancellationToken cancellationToken = default)
+    {
+        Server? server = await db.Servers.FindAsync(new object[] { serverId }, cancellationToken);
+        if (server is null) throw new InvalidOperationException("server not found");
+        db.Servers.Remove(server);
+        await db.SaveChangesAsync(cancellationToken);
+    }
+    
 }

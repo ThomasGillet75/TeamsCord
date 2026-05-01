@@ -16,5 +16,12 @@ public class MemberRepository(DatabaseContext db) : IMemberRepository
         db.Members.Add(member);
         db.SaveChanges();
     }
+
+    public void DeleteMemberByServerId(Guid serverId, CancellationToken cancellationToken = default)
+    {
+        IQueryable<Member> membersToDelete = db.Members.Where(member => member.ServerId == serverId);
+        db.Members.RemoveRange(membersToDelete);
+        db.SaveChanges();
+    }
 }
 

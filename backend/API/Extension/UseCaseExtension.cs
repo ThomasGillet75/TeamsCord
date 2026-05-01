@@ -17,6 +17,7 @@ public static class UseCaseExtension
         services.AddScoped<AddServerUseCase>();
         services.AddScoped<GetChannelsUseCase>();
         services.AddScoped<AddChannelUseCase>();
+        services.AddScoped<DeleteServerUseCase>();
         return services;
     }
 }

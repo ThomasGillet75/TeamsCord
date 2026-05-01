@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {AuthTokenService} from './auth-token.service';
 import {Observable} from 'rxjs';
 import {AddChannelRequest, GetChannelsRequest, GetChannelsResponse} from '../models/channel.model';
-import {AddServersRequest, GetServersResponse} from '../models/server.model';
+import {AddServersRequest, DeleteServerRequest, GetServersResponse} from '../models/server.model';
 import {environment} from '../../../../environments/environment.development';
 
 const BACKEND_API_URL: string = environment.apiURL;
@@ -12,6 +12,7 @@ const GET_CHANNELS_URL: string = AUTH_URL + '/all/channels';
 const GET_SERVERS_URL: string = AUTH_URL + '/all/servers';
 const ADD_SERVER_URL: string = AUTH_URL + '/add/server';
 const ADD_CHANNEL_URL: string = AUTH_URL + '/add/channel';
+const DELETE_SERVER_URL: string = AUTH_URL + '/delete/server';
 
 @Injectable({providedIn: 'root'})
 export class ServerService {
@@ -49,4 +50,12 @@ export class ServerService {
       .set('name', payload.name);
     return this.http.post<void>(ADD_SERVER_URL, payload, {headers, params});
   }
+
+  deleteServer(payload: DeleteServerRequest): Observable<void> {
+    const token = this.authTokenService.getToken();
+    const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
+    const url = `${DELETE_SERVER_URL}/${payload.serverId}`;
+    return this.http.delete<void>(url, {headers});
+  }
+
 }

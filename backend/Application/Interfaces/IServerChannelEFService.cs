@@ -8,4 +8,5 @@ public interface IServerChannelEFService
     void AddServerAsync(ServerEntity serverEntity, Guid userId);
     void AddChannelAsync(ChannelEntity channelEntity);
     Task<IReadOnlyList<ChannelEntity>> GetChannelsByServerIdAsync(Guid serverId);
+    void DeleteServerAsync(Guid serverId);
 }

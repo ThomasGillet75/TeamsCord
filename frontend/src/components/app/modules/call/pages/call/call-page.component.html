@@ -2,7 +2,7 @@
     <tc-background-shader/>
   <div class="call-page-content-layer">
     <tc-header>
-      <tc-dropdown-menu-container slot="left" [name]="selectedServer()?.name"/>
+      <tc-dropdown-menu-container slot="left" [name]="selectedServer()?.name" [serverId]="selectedServer()?.id"/>
       <div slot="right">{{currentUser()?.username}}</div>
     </tc-header>
     <div class="call-layout">

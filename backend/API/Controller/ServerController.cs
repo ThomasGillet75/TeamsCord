@@ -1,9 +1,7 @@
 ﻿using System.Security.Claims;
 using Application.DTOs.Server.Requests;
 using Application.UseCase.Server;
-using Domain.Entity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controller;
@@ -28,6 +26,15 @@ public class ServerController(ServerUseCase serverUseCase) : ControllerBase
         string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (string.IsNullOrWhiteSpace(userIdClaim)) return Unauthorized();
         serverUseCase.AddServer.Execute(postServerRequest, userIdClaim);
+        return Ok();
+    }
+
+    [HttpDelete("delete/server/{serverId}")]
+    [Authorize]
+    public async Task<ActionResult> DeleteServer(string serverId)
+    {
+        DeleteServerRequest request = new DeleteServerRequest(serverId);
+        serverUseCase.DeleteServer.Execute(request);
         return Ok();
     }
 

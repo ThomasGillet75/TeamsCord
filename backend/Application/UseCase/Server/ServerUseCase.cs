@@ -5,5 +5,6 @@ public record ServerUseCase
     GetServersUseCase GetServers,
     AddServerUseCase AddServer,
     GetChannelsUseCase GetChannels,
-    AddChannelUseCase AddChannel
+    AddChannelUseCase AddChannel,
+    DeleteServerUseCase DeleteServer
 );
