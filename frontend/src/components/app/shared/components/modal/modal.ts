@@ -1,31 +1,30 @@
 import {Component, input, InputSignal, output} from '@angular/core';
-import {Button} from "../../../../shared/components/button/button";
-import {FormGroup} from '@angular/forms';
+import {Button} from "../button/button";
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 
 export interface IModal{
   handleClose(): void;
-  handleSubmit(form: FormGroup): void;
+  handleSubmit(): void;
 }
 
 @Component({
   selector: 'tc-modal',
-    imports: [
-        Button
-    ],
+  imports: [
+    Button,
+    ReactiveFormsModule
+  ],
   templateUrl: './modal.html',
   styleUrl: './modal.css',
 })
 
 export class Modal {
-  form = input<FormGroup | null>(null);
   submitButtonText:InputSignal<string> = input<string>('Valider');
-  onSubmit = output<FormGroup>();
+  onSubmit = output<void>();
   onClose = output<void>();
 
   handleSubmit(): void {
-    if (this.form() && this.form()!.valid) {
-      this.onSubmit.emit(this.form()!);
-    }
+    this.onSubmit.emit();
+    this.onClose.emit();
   }
 
   handleClose(): void {

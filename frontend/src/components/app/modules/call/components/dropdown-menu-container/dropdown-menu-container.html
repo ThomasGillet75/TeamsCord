@@ -6,6 +6,6 @@
   <div class="flex-column dropdown-menu gap" [class.active]="dropdownIsOpen">
     <tc-button variant="secondary">Config</tc-button>
     <tc-button variant="secondary">Modify</tc-button>
-    <tc-button variant="secondary">Modify</tc-button>
+    <tc-button (onClick)="onDeleteClick()" variant="secondary">Delete</tc-button>
   </div>
 </div>

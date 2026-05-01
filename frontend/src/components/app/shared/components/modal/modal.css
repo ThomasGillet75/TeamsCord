@@ -26,6 +26,7 @@
   flex-direction: column;
   animation: configEnter 600ms ease-in-out;
   transform-origin: center center;
+  position: relative;
 }
 
 @keyframes configEnter {

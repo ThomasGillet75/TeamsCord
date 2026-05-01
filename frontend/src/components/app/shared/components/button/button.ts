@@ -10,5 +10,6 @@ type ButtonVariant = 'primary' | 'secondary' | 'square';
 })
 export class Button {
   variant: InputSignal<ButtonVariant> = input<ButtonVariant>('primary');
+  type: InputSignal<'button' | 'submit'> = input<'button' | 'submit'>('button');
   onClick = output<void>();
 }

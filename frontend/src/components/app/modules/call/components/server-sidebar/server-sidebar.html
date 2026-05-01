@@ -1,0 +1,21 @@
+<aside class="server-sidebar flex-column-center">
+  <div class="server-list gap">
+    @for (server of servers(); track server.id) {
+      <tc-server-item
+        [name]="server.name"
+        [isSelected]="selectedServer()?.id === server.id"
+        (onSelect)="onSelectServer.emit(server)"
+      />
+    }
+  </div>
+  <div class="sidebar-add gap" (mouseenter)="isAddButtonHovered = true"
+       (mouseleave)="isAddButtonHovered = false">
+    <tc-add-icon [isHovered]="isAddButtonHovered" (click)="onShowModal()"/>
+  </div>
+</aside>
+
+@if (show) {
+  <tc-modal-container>
+    <tc-server-config (onShow)="onShowModal()" (onValidate)="onAddServer.emit($event)"/>
+  </tc-modal-container>
+}

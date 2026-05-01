@@ -3,7 +3,7 @@ import {Button} from '../../../../shared/components/button/button';
 import {ChannelModel} from '../../../../core/models/channel.model';
 
 @Component({
-  selector: 'app-channel',
+  selector: 'tc-channel',
   imports: [
     Button
   ],

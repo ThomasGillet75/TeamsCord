@@ -14,9 +14,9 @@
       />
       <div class="flex-row call-page-content gap">
         @for (channel of channels(); track channel) {
-          <app-channel [channel]="channel">
+          <tc-channel [channel]="channel">
             <tc-member memberName="Thomas"/>
-          </app-channel>
+          </tc-channel>
         }
         <tc-channel-add-container (onValidate)="onAddChannel($event)"/>
       </div>

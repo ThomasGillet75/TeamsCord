@@ -1,12 +1,14 @@
 import {Component, input, InputSignal, model, ModelSignal} from '@angular/core';
 import {NgClass} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
 
 type InputVariant = 'primary' | 'secondary';
 
 @Component({
   selector: 'tc-input',
   imports: [
-    NgClass
+    NgClass,
+    ReactiveFormsModule
   ],
   templateUrl: './input.html',
   styleUrl: './input.css',

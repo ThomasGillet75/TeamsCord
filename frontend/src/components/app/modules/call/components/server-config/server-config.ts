@@ -1,6 +1,5 @@
 import {Component, output} from '@angular/core';
-import {Button} from "../../../../shared/components/button/button";
-import {IModal, Modal} from '../modal/modal';
+import {IModal, Modal} from '../../../../shared/components/modal/modal';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Input} from "../../../../shared/components/input/input";
 
@@ -17,6 +16,7 @@ export class ServerConfig implements IModal {
   serverForm: FormGroup;
   onShow = output<void>();
   onValidate =output<string>();
+  serverName: string = "";
 
   constructor(private formBuilder: FormBuilder) {
     this.serverForm = this.formBuilder.group({
@@ -26,13 +26,13 @@ export class ServerConfig implements IModal {
 
   handleClose(): void {
     this.onShow.emit()
-
   }
 
-  handleSubmit(form: FormGroup): void {
-    if (form.valid) {
-      this.onValidate.emit(form.get('serverName')?.value);
-      this.onShow.emit();
+  handleSubmit(): void {
+    const trimmedServerName :string = this.serverName;
+    if (trimmedServerName.length === 0) {
+      return;
     }
+    this.onValidate.emit(trimmedServerName);
   }
 }

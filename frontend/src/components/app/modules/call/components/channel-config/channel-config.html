@@ -1,3 +1,4 @@
-<tc-modal [form]="channelForm"  submitButtonText="Create Channel" (onSubmit)="handleSubmit($event)" (onClose)="handleClose()">
-    <tc-input variant="secondary" title="Channel Name" [(value)]="channelName"/>
+<tc-modal submitButtonText="Create Channel" (onSubmit)="handleSubmit()" (onClose)="handleClose()">
+  <tc-input variant="secondary" title="Channel Name" [(value)]="channelName"/>
 </tc-modal>
+

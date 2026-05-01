@@ -1,37 +1,30 @@
-import {Component, output} from '@angular/core';
+import {Component, effect, output, signal} from '@angular/core';
 import {Input} from '../../../../shared/components/input/input';
 import {Button} from '../../../../shared/components/button/button';
-import {IModal, Modal} from '../modal/modal';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {IModal, Modal} from '../../../../shared/components/modal/modal';
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 
 @Component({
   selector: 'tc-channel-config',
   imports: [
     Input,
-    Modal
+    Modal,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   templateUrl: './channel-config.html',
   styleUrl: './channel-config.css',
 })
 export class ChannelConfig implements IModal {
-  channelForm: FormGroup;
-  channelName: string = "";
+  channelName = signal<string>('');
   onValidate = output<string>();
   onChange = output<void>();
 
-  constructor(private formBuilder: FormBuilder) {
-    this.channelForm = this.formBuilder.group({
-      channelName: ['', Validators.required]
-    });
+  handleSubmit(): void {
+      this.onValidate.emit(this.channelName());
   }
 
-  handleSubmit(form: FormGroup): void {
-    if (form.valid) {
-      this.onValidate.emit(form.get('channelName')?.value);
-    }
-  }
   handleClose() : void {
     this.onChange.emit();
   }
-
 }

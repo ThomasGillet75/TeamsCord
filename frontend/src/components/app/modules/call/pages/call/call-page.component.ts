@@ -3,7 +3,7 @@ import {Channel} from '../../components/channel/channel';
 import {Member} from '../../components/member/member';
 import {ChannelAddContainer} from '../../components/channel-add-container/channel-add-container';
 import {Header} from '../../components/header/header';
-import {ServerSidebar} from '../../../../shared/components/server-sidebar/server-sidebar';
+import {ServerSidebar} from '../../components/server-sidebar/server-sidebar';
 import {Server} from '../../../../core/models/server.model';
 import {ServerService} from '../../../../core/services/server.service';
 import {firstValueFrom} from 'rxjs';
@@ -102,13 +102,8 @@ export class CallPage implements OnInit {
   }
 
   async onAddServer(serverName: string): Promise<void> {
-    const trimmedName: string = serverName.trim();
-
-    if (trimmedName.length === 0) {
-      return;
-    }
     try {
-      await firstValueFrom(this.serverService.addServer({name: trimmedName}));
+      await firstValueFrom(this.serverService.addServer({name: serverName}));
       await this.loadServers();
     } catch (error: unknown) {
       console.error('Failed to add server:', error);
