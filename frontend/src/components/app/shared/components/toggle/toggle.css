@@ -1,0 +1,33 @@
+.icon-wrapper {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  filter: url('#goo');
+  cursor: pointer;
+}
+
+.dot, .arm {
+  position: absolute;
+  background: var(--main-color);
+}
+
+.dot {
+  border-radius: 50%;
+  border: 4px solid var(--main-color);
+  transition: left 0.3s ease-out, background 0.3s ease-out;;
+}
+
+.left { width: 22px; height: 22px; top: 26px; left: 0; }
+
+
+
+.arm-left { height: 8px; width: 48px; top: 32px; }
+.arm-left {
+  left: 12px;
+  transform-origin: right;
+}
+
+.icon-wrapper.active .left {
+  left: 48px;
+  background: var(--orange-color);
+}

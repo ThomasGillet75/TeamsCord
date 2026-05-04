@@ -2,12 +2,14 @@ import {Component, output} from '@angular/core';
 import {IModal, Modal} from '../../../../shared/components/modal/modal';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Input} from "../../../../shared/components/input/input";
+import {Toggle} from '../../../../shared/components/toggle/toggle';
 
 @Component({
   selector: 'tc-server-config',
   imports: [
     Modal,
-    Input
+    Input,
+    Toggle
   ],
   templateUrl: './server-config.html',
   styleUrl: './server-config.css',

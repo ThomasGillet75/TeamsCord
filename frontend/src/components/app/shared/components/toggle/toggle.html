@@ -1,0 +1,13 @@
+<svg style="visibility: hidden; position: absolute;" width="0" height="0">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 15 -7" result="goo" />
+    </filter>
+  </defs>
+</svg>
+
+<div (click)=handleToggle() class="icon-wrapper" [class.active]="isToggled">
+  <div class="arm arm-left"></div>
+  <div class="dot left"></div>
+</div>
