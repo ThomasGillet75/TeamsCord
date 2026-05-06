@@ -21,7 +21,8 @@ export class ChannelConfig implements IModal {
   onChange = output<void>();
 
   handleSubmit(): void {
-      this.onValidate.emit(this.channelName());
+    this.onValidate.emit(this.channelName());
+    this.handleClose()
   }
 
   handleClose() : void {

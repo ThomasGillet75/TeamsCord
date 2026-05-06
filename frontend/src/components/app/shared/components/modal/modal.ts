@@ -24,7 +24,6 @@ export class Modal {
 
   handleSubmit(): void {
     this.onSubmit.emit();
-    this.onClose.emit();
   }
 
   handleClose(): void {

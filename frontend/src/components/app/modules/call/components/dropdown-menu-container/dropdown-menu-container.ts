@@ -1,4 +1,4 @@
-import {Component, inject, input, InputSignal, signal} from '@angular/core';
+import {Component, inject, input, InputSignal, output, signal} from '@angular/core';
 import {ArrowIcon} from '../../../../shared/components/icons/arrow/arrow.icon/arrow.icon';
 import {EDirection} from '../../../../shared/enum/EDirection';
 import {Button} from '../../../../shared/components/button/button';
@@ -18,6 +18,7 @@ export class DropdownMenuContainer {
   public dropdownIsOpen = false;
   public name:InputSignal<string | undefined> = input<string | undefined>("");
   public serverId:InputSignal<string | undefined> = input<string | undefined>("");
+  public updateServers = output<void>();
   private readonly serverService: ServerService = inject(ServerService);
 
   public toggleDropdown(): void {
@@ -33,8 +34,12 @@ export class DropdownMenuContainer {
   public onDeleteClick(): void {
     const id = this.serverId();
     if (id !== undefined) {
-      this.serverService.deleteServer({ serverId: id }).subscribe({});
+      this.serverService.deleteServer({ serverId: id }).subscribe({
+        next: () => {
+          this.updateServers.emit();
+          this.toggleDropdown();
+        },
+      });
     }
-    this.toggleDropdown();
   }
 }

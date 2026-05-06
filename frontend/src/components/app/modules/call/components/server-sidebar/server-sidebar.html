@@ -16,6 +16,6 @@
 
 @if (show) {
   <tc-modal-container>
-    <tc-server-config (onShow)="onShowModal()" (onValidate)="onAddServer.emit($event)"/>
+    <tc-server-config (onShow)="onShowModal()" (onServerCreated)="onServerCreated.emit()"/>
   </tc-modal-container>
 }

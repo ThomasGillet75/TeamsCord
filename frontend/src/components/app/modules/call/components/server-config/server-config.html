@@ -1,7 +1,8 @@
 <tc-modal
-  submitButtonText="Create Server"
+  [submitButtonText]="submitButtonLabel"
   (onSubmit)="handleSubmit()"
   (onClose)="handleClose()">
-  <tc-toggle/>
-  <tc-input variant="secondary" title="Server Name" [(value)]="serverName"/>
+  <tc-text>Add a server</tc-text>
+  <tc-slide-menu (optionChanged)="onOptionChanged($event)"><div slot="left">Create</div> <div slot="right">Join</div></tc-slide-menu>
+  <tc-input variant="secondary" [title]="inputTitle" [(value)]="inputText"/>
 </tc-modal>

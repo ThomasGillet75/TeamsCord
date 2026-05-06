@@ -58,15 +58,27 @@ export class CallPage implements OnInit {
   }
 
   async loadServers(): Promise<void> {
-    if (this.selectedServer() != null) {
-      this.servers.set([]);
-    }
     const response = await firstValueFrom(this.serverService.getServers());
     this.servers.set(response.servers);
-    if (this.selectedServer() == null) {
+
+    if (this.selectedServer() === null && response.servers.length > 0) {
       this.selectedServer.set(response.servers[0]);
     }
   }
+
+  async onServersChanged(): Promise<void> {
+    const previousServerId = this.selectedServer()?.id;
+
+    await this.loadServers();
+
+    const stillExists = this.servers().some(s => s.id === previousServerId);
+
+    if (!stillExists && this.servers().length > 0) {
+      this.selectedServer.set(this.servers()[0]);
+      await this.loadChannels();
+    }
+  }
+
 
   async loadChannels(): Promise<void> {
     const server: Server | null = this.selectedServer();
@@ -99,14 +111,5 @@ export class CallPage implements OnInit {
     this.selectedServer.set(server);
     await this.loadChannels()
 
-  }
-
-  async onAddServer(serverName: string): Promise<void> {
-    try {
-      await firstValueFrom(this.serverService.addServer({name: serverName}));
-      await this.loadServers();
-    } catch (error: unknown) {
-      console.error('Failed to add server:', error);
-    }
   }
 }

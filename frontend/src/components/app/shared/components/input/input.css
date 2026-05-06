@@ -14,7 +14,7 @@
 .text.primary{
   color: var(--text-color-grey);
   font-family: var(--font-engine);
-  font-size: 18px;
+  font-size: var(--font-size);
 }
 
 .input.secondary{
@@ -33,5 +33,5 @@
 .text.secondary{
   color: var(--text-color-dark);
   font-family: var(--font-engine);
-  font-size: 18px;
+  font-size: var(--font-size);
 }

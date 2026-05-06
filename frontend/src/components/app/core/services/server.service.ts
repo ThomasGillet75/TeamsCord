@@ -11,6 +11,7 @@ const AUTH_URL: string = `${BACKEND_API_URL}/server`;
 const GET_CHANNELS_URL: string = AUTH_URL + '/all/channels';
 const GET_SERVERS_URL: string = AUTH_URL + '/all/servers';
 const ADD_SERVER_URL: string = AUTH_URL + '/add/server';
+const JOIN_SERVER_URL: string = AUTH_URL + '/join/server';
 const ADD_CHANNEL_URL: string = AUTH_URL + '/add/channel';
 const DELETE_SERVER_URL: string = AUTH_URL + '/delete/server';
 
@@ -51,11 +52,18 @@ export class ServerService {
     return this.http.post<void>(ADD_SERVER_URL, payload, {headers, params});
   }
 
+  joinServer(payload : AddServersRequest) : Observable<void>{
+    const token = this.authTokenService.getToken();
+    const headers : HttpHeaders = new HttpHeaders({Authorization: `Bearer ${token}`});
+    const params = new HttpParams()
+      .set('name', payload.name);
+    return this.http.post<void>(JOIN_SERVER_URL, payload, {headers, params});
+  }
+
   deleteServer(payload: DeleteServerRequest): Observable<void> {
     const token = this.authTokenService.getToken();
     const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
     const url = `${DELETE_SERVER_URL}/${payload.serverId}`;
     return this.http.delete<void>(url, {headers});
   }
-
 }

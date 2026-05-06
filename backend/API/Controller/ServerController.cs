@@ -29,6 +29,16 @@ public class ServerController(ServerUseCase serverUseCase) : ControllerBase
         return Ok();
     }
 
+    [HttpPost("join/server")]
+    [Authorize]
+    public async Task<ActionResult> JoinServer(PostServerRequest joinServerRequest)
+    {
+        string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrWhiteSpace(userIdClaim)) return Unauthorized();
+        serverUseCase.JoinServer.Execute(joinServerRequest, userIdClaim);
+        return Ok();
+    }
+
     [HttpDelete("delete/server/{serverId}")]
     [Authorize]
     public async Task<ActionResult> DeleteServer(string serverId)

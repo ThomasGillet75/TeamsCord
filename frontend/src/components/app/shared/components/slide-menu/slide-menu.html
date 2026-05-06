@@ -1,0 +1,15 @@
+<div class="container flex-row-center">
+  <div
+    class="item flex-row-center"
+    (click)="selectOption(EMenuOption.LEFT)"
+    [class.active]="isSelected(EMenuOption.LEFT)">
+    <ng-content select="[slot=left]"/>
+  </div>
+  <div
+    class="item flex-row-center"
+    (click)="selectOption(EMenuOption.RIGHT)"
+    [class.active]="isSelected(EMenuOption.RIGHT)">
+    <ng-content select="[slot=right]"/>
+  </div>
+  <div class="slide" [class.slide-join]="isSelected(EMenuOption.RIGHT)"></div>
+</div>

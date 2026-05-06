@@ -8,4 +8,10 @@
   --text-color-dark: #27292FFF;
   --text-color-white: #fdfdff;
   --text-color-grey: rgb(164, 168, 176);
+
+  --font-size: 18px;
+
+  --border-radius-s: 4px;
+  --border-radius-m: 8px;
+  --border-radius-l: 12px;
 }

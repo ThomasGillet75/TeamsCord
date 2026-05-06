@@ -1,0 +1,10 @@
+.text{
+  font-family: var(--font-engine);
+  font-weight: bold;
+  color: var(--text-color-dark);
+  font-size:var(--font-size);
+}
+
+.color-grey{
+  color: var(--text-color-grey);
+}

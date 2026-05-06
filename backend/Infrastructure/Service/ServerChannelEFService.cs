@@ -38,7 +38,27 @@ public class ServerChannelEFService(IServerRepository serverRepository, IChannel
             throw new InvalidOperationException("error occurred while adding the server to the database");
         }
     }
-    
+
+    public void JoinServerAsync(Guid serverId, Guid userId)
+    {
+        if (serverId == Guid.Empty) throw new ArgumentException("serverId is required", nameof(serverId));
+        if (userId == Guid.Empty) throw new ArgumentException("userId is required", nameof(userId));
+        try
+        {
+            Member newMember = new Member
+            {
+                ServerId = serverId,
+                UserId = userId,
+                Role = ERole.Member
+            };
+            memberRepository.AddMember(newMember);
+        }
+        catch (DbUpdateException)
+        {
+            throw new InvalidOperationException("error occurred while adding the member to the database");
+        }
+    }
+
     public void AddChannelAsync(ChannelEntity channelEntity)
     {
         if (channelEntity is null) throw new ArgumentNullException(nameof(channelEntity));
