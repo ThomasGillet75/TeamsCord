@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
+
+type TextColorVariant = 'dark' | 'light';
+
 
 @Component({
   selector: 'tc-text',
@@ -7,5 +10,5 @@ import { Component } from '@angular/core';
   styleUrl: './text.css',
 })
 export class Text {
-
+  color: InputSignal<TextColorVariant> = input<TextColorVariant>('dark');
 }

@@ -27,7 +27,7 @@
   position: absolute;
   background-color: var(--main-color);
   border-radius: 12px;
-  width: 192px;
+  width: 224px;
   padding: 8px;
   z-index: 10;
   right: 8px;
@@ -42,3 +42,11 @@
   color: var(--text-color-dark);
   background-color: var(--secondary-color);
 }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+

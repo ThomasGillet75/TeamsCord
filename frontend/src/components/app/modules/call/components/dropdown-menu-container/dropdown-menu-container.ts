@@ -3,12 +3,19 @@ import {ArrowIcon} from '../../../../shared/components/icons/arrow/arrow.icon/ar
 import {EDirection} from '../../../../shared/enum/EDirection';
 import {Button} from '../../../../shared/components/button/button';
 import {ServerService} from '../../../../core/services/server.service';
+import {Text} from '../../../../shared/components/text/text';
+import {CopyIcon} from '../../../../shared/components/icons/copy-icon/copy-icon';
+import {NgClass, NgStyle} from '@angular/common';
 
 @Component({
   selector: 'tc-dropdown-menu-container',
   imports: [
     ArrowIcon,
     Button,
+    Text,
+    CopyIcon,
+    NgStyle,
+    NgClass,
   ],
   templateUrl: './dropdown-menu-container.html',
   styleUrl: './dropdown-menu-container.css',
@@ -29,6 +36,10 @@ export class DropdownMenuContainer {
     else {
       this.direction = EDirection.Down;
     }
+  }
+
+  public onCopyServerId(){
+    navigator.clipboard.writeText(this.serverId() ?? "");
   }
 
   public onDeleteClick(): void {

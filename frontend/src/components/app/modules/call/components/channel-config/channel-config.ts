@@ -3,6 +3,8 @@ import {Input} from '../../../../shared/components/input/input';
 import {Button} from '../../../../shared/components/button/button';
 import {IModal, Modal} from '../../../../shared/components/modal/modal';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Text} from '../../../../shared/components/text/text';
+import {SlideMenu} from '../../../../shared/components/slide-menu/slide-menu';
 
 @Component({
   selector: 'tc-channel-config',
@@ -11,6 +13,8 @@ import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, V
     Modal,
     ReactiveFormsModule,
     FormsModule,
+    Text,
+    SlideMenu,
   ],
   templateUrl: './channel-config.html',
   styleUrl: './channel-config.css',

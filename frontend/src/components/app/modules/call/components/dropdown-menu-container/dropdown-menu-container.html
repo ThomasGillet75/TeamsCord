@@ -4,8 +4,7 @@
     <tc-arrow-icon color="#303446" [direction]="direction" size="48"/>
   </button>
   <div class="flex-column dropdown-menu gap" [class.active]="dropdownIsOpen">
-    <tc-button variant="secondary">Config</tc-button>
-    <tc-button variant="secondary">Modify</tc-button>
-    <tc-button (onClick)="onDeleteClick()" variant="secondary">Delete</tc-button>
+    <tc-button (onClick)="onCopyServerId()" variant="secondary"><div class="flex-row-center"><tc-text [ngClass]="'truncate'" >{{ serverId()}}</tc-text><tc-copy-icon/></div></tc-button>
+    <tc-button (onClick)="onDeleteClick()" variant="secondary"><tc-text>Delete</tc-text></tc-button>
   </div>
 </div>
