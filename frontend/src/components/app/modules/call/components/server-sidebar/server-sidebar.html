@@ -1,5 +1,5 @@
 <aside class="server-sidebar flex-column-center">
-  <div class="server-list gap">
+  <div class="server-list gap-s">
     @for (server of servers(); track server.id) {
       <tc-server-item
         [name]="server.name"
@@ -8,7 +8,7 @@
       />
     }
   </div>
-  <div class="sidebar-add gap" (mouseenter)="isAddButtonHovered = true"
+  <div class="sidebar-add gap-s" (mouseenter)="isAddButtonHovered = true"
        (mouseleave)="isAddButtonHovered = false">
     <tc-add-icon [isHovered]="isAddButtonHovered" (click)="onShowModal()"/>
   </div>

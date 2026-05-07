@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Domain;
+using Domain.Enum;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Models;

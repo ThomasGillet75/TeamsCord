@@ -14,4 +14,9 @@
   --border-radius-s: 4px;
   --border-radius-m: 8px;
   --border-radius-l: 12px;
+
+  --padding-s: 4px;
+  --padding-m: 8px;
+  --padding-l: 12px;
+  --padding-xl: 20px;
 }

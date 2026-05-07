@@ -1,6 +1,6 @@
 <tc-modal submitButtonText="Create Channel" (onSubmit)="handleSubmit()" (onClose)="handleClose()">
   <tc-text>Add A Channel</tc-text>
-  <tc-slide-menu><div slot="left">Vocal</div> <div slot="right">Text</div></tc-slide-menu>
+  <tc-slide-menu (optionChanged)="onOptionChanged($event)"><div slot="left">Vocal</div><div slot="right">Text</div></tc-slide-menu>
   <tc-input variant="secondary" title="Channel Name" [(value)]="channelName"/>
 </tc-modal>
 

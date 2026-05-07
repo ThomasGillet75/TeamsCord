@@ -2,16 +2,39 @@
   width: 250px;
   height: 250px;
   background: var(--secondary-color);
-  border-radius: 12px;
-  padding: 12px;
+  border-radius:  var(--border-radius-l);
+  padding: var(--padding-l);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.channel.expanded {
+  width: 100vh;
+  height: 100vh;
+  z-index: 1000;
+  border-radius: 0;
+  animation: zoomIn 0.6s ease-in-out forwards;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.05);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .channel > h3 {
   font-size: 24px;
   font-family: var(--font-engine);
   color: #25262a;
-  margin-bottom:4px
+  margin-bottom:4px;
+  flex-shrink: 0;
 }
 
 .button-container{
@@ -19,4 +42,38 @@
   bottom: 12px;
   right: 12px;
   left: 12px;
+}
+
+.text-channel-container
+{
+  width: 100%;
+  background: var(--main-color);
+  border-radius: var(--border-radius-l);
+  flex: 1;
+  padding: var(--padding-xl);
+}
+
+.text-channel-bubble{
+  width: 70%;
+  height: 42px;
+  background: var(--secondary-color);
+  border-radius: var(--border-radius-l);
+}
+
+.left{
+  width: 100%;
+}
+
+.dot{
+  background: var(--main-color);
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+}
+
+.circle{
+  background: var(--secondary-color);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
 }

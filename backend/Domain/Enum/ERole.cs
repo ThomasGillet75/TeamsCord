@@ -1,4 +1,4 @@
-﻿namespace Domain;
+﻿namespace Domain.Enum;
 
 public enum ERole
 {

@@ -14,7 +14,6 @@ import {NgClass, NgStyle} from '@angular/common';
     Button,
     Text,
     CopyIcon,
-    NgStyle,
     NgClass,
   ],
   templateUrl: './dropdown-menu-container.html',

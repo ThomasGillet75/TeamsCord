@@ -31,6 +31,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("ServerId")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ServerId");
@@ -54,6 +57,33 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ServerId");
 
                     b.ToTable("Members");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.Message", b =>
+                {
+                    b.Property<Guid>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ChannelId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("ChannelId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.Server", b =>
@@ -134,6 +164,22 @@ namespace Infrastructure.Migrations
                     b.Navigation("Server");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.Message", b =>
+                {
+                    b.HasOne("Infrastructure.Models.Channel", "Channel")
+                        .WithMany("Messages")
+                        .HasForeignKey("ChannelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Channel");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.Channel", b =>
+                {
+                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.Server", b =>

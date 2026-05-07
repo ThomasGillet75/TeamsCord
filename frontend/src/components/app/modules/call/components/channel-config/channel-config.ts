@@ -1,11 +1,16 @@
-import {Component, effect, output, signal} from '@angular/core';
+import {Component, output, signal} from '@angular/core';
 import {Input} from '../../../../shared/components/input/input';
-import {Button} from '../../../../shared/components/button/button';
 import {IModal, Modal} from '../../../../shared/components/modal/modal';
-import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Text} from '../../../../shared/components/text/text';
 import {SlideMenu} from '../../../../shared/components/slide-menu/slide-menu';
+import {EMenuOption} from '../../../../shared/enum/EMenuOption';
+import {EChannel} from '../../../../shared/enum/EChannel';
 
+export interface ChannelValidationData {
+  name: string;
+  type: EChannel;
+}
 @Component({
   selector: 'tc-channel-config',
   imports: [
@@ -21,15 +26,27 @@ import {SlideMenu} from '../../../../shared/components/slide-menu/slide-menu';
 })
 export class ChannelConfig implements IModal {
   channelName = signal<string>('');
-  onValidate = output<string>();
+  onValidate = output<ChannelValidationData>();
   onChange = output<void>();
+  selectedOption: EMenuOption = EMenuOption.LEFT;
+
+  onOptionChanged(option: EMenuOption): void {
+    this.selectedOption = option;
+  }
 
   handleSubmit(): void {
-    this.onValidate.emit(this.channelName());
+    let channelType: EChannel = EChannel.Text;
+    if (this.selectedOption === EMenuOption.LEFT) {
+      channelType = EChannel.Vocal;
+    }
+    this.onValidate.emit({
+      name: this.channelName(),
+      type: channelType
+    });
     this.handleClose()
   }
 
-  handleClose() : void {
+  handleClose(): void {
     this.onChange.emit();
   }
 }

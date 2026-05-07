@@ -27,6 +27,20 @@
   flex-direction: row;
 }
 
+.flex-row-right{
+  display: flex;
+  flex-direction:row;
+  justify-content: end;
+  align-items: end;
+}
+
+.flex-row-left{
+  display: flex;
+  flex-direction:row;
+  justify-content: start;
+  align-items: end;
+}
+
 .flex-row-center {
   display: flex;
   flex-direction: row;
@@ -45,6 +59,10 @@
   height: 100%;
 }
 
-.gap{
+.gap-s{
   gap: 8px;
+}
+
+.gap-m{
+  gap: 12px;
 }

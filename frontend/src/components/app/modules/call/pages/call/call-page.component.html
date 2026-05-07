@@ -12,7 +12,7 @@
         (onSelectServer)="onSelectServer($event)"
         (onServerCreated)="loadServers()"
       />
-      <div class="flex-row call-page-content gap">
+      <div class="flex-row call-page-content gap-s">
         @for (channel of channels(); track channel) {
           <tc-channel [channel]="channel">
             <tc-member memberName="Thomas"/>

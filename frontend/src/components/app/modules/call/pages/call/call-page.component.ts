@@ -13,6 +13,8 @@ import {Button} from '../../../../shared/components/button/button';
 import {DropdownMenuContainer} from '../../components/dropdown-menu-container/dropdown-menu-container';
 import {User} from '../../../../core/models/auth.model';
 import {AuthService} from '../../../../core/services/auth.service';
+import {EChannel} from '../../../../shared/enum/EChannel';
+import {ChannelValidationData} from '../../components/channel-config/channel-config';
 
 @Component({
   selector: 'app-call',
@@ -91,16 +93,16 @@ export class CallPage implements OnInit {
     this.channels.set(response.channels);
   }
 
-  async onAddChannel(name: string): Promise<void> {
+  async onAddChannel(channelValidationData: ChannelValidationData): Promise<void> {
     const server: Server | null = this.selectedServer();
-    const trimmedName: string = name.trim();
+    const trimmedName: string = channelValidationData.name.trim();
 
     if (trimmedName.length === 0 || server === null) {
       return;
     }
 
     try {
-      await firstValueFrom(this.serverService.addChannel({name: trimmedName, serverId: server.id}));
+      await firstValueFrom(this.serverService.addChannel({name: trimmedName, serverId: server.id, type: channelValidationData.type}));
       await this.loadChannels();
     } catch (error: unknown) {
       console.error('Failed to add channel:', error);

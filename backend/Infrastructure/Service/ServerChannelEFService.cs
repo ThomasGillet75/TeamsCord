@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces;
-using Domain;
 using Domain.Entity;
+using Domain.Enum;
 using Infrastructure.Interfaces.Repositories;
 using Infrastructure.Mapper;
 using Infrastructure.Models;

@@ -1,6 +1,6 @@
 import {Component, output} from '@angular/core';
 import {ChannelAdd} from '../channel-add/channel-add';
-import {ChannelConfig} from '../channel-config/channel-config';
+import {ChannelConfig, ChannelValidationData} from '../channel-config/channel-config';
 
 @Component({
   selector: 'tc-channel-add-container',
@@ -13,7 +13,7 @@ import {ChannelConfig} from '../channel-config/channel-config';
 })
 export class ChannelAddContainer {
   change:boolean = true;
-  onValidate = output<string>();
+  onValidate = output<ChannelValidationData>();
   onChangeAdd() : void {
     this.change = !this.change;
   }

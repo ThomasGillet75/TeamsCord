@@ -3,7 +3,7 @@
     {{ name() }}
     <tc-arrow-icon color="#303446" [direction]="direction" size="48"/>
   </button>
-  <div class="flex-column dropdown-menu gap" [class.active]="dropdownIsOpen">
+  <div class="flex-column dropdown-menu gap-s" [class.active]="dropdownIsOpen">
     <tc-button (onClick)="onCopyServerId()" variant="secondary"><div class="flex-row-center"><tc-text [ngClass]="'truncate'" >{{ serverId()}}</tc-text><tc-copy-icon/></div></tc-button>
     <tc-button (onClick)="onDeleteClick()" variant="secondary"><tc-text>Delete</tc-text></tc-button>
   </div>

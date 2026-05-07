@@ -9,6 +9,7 @@ public class DatabaseContext : DbContext
     public DbSet<Server> Servers => Set<Server>();
     public DbSet<Channel> Channels => Set<Channel>();
     public DbSet<Member> Members => Set<Member>();
+    public DbSet<Message> Messages => Set<Message>();
 
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,5 +36,10 @@ public class DatabaseContext : DbContext
 
         modelBuilder.Entity<Member>()
             .HasKey(m => new { m.UserId, m.ServerId });
+        modelBuilder.Entity<Message>()
+            .HasOne(m => m.Channel)
+            .WithMany(c => c.Messages)
+            .HasForeignKey(m => m.ChannelId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -8,6 +8,6 @@ public class AddChannelUseCase(IServerChannelEFService serverChannelEFService)
 {
     public void Execute(PostChannelRequest request)
     {
-        serverChannelEFService.AddChannelAsync(new ChannelEntity(request.Name, request.ServerId));
+        serverChannelEFService.AddChannelAsync(new ChannelEntity(request.Name, request.ServerId, request.Type));
     }
 }

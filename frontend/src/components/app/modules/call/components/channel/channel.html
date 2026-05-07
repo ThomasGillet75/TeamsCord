@@ -1,9 +1,23 @@
-<div class="channel ">
+<div class="channel" [class.expanded]="isExpanded()">
   <h3>{{ channel().name }}</h3>
-  <div class="gap flex-column-start">
-    <ng-content/>
-  </div>
-  <div class="button-container flex-row-center">
-    <tc-button (click)="onClickJoin()">rejoindre</tc-button>
-  </div>
+
+  @if(channel().type == EChannel.Vocal ){
+    <div class="gap-s flex-column-start">
+      <ng-content/>
+    </div>
+    <div class="button-container flex-row-center">
+      <tc-button (click)="onClickJoin()">Join</tc-button>
+    </div>
+  } @else {
+    <div class="text-channel-container flex-column gap-m">
+      <div class="flex-row-left gap-s">
+        <div class="circle"></div>
+        <div class="text-channel-bubble flex-row-center gap-m"><div class="dot"></div> <div class="dot"></div> <div class="dot"></div></div>
+      </div>
+      <div class="flex-row-right left gap-s">
+        <div class="text-channel-bubble flex-row-center gap-m"> <div class="dot"></div> <div class="dot"></div> <div class="dot"></div> </div> <div class="circle"></div>
+      </div>
+      <tc-button variant="secondary" (click)="onClickJoin()">Enter</tc-button>
+    </div>
+  }
 </div>
